@@ -3540,11 +3540,14 @@ button,
   .section.section--max-width-400 {
     max-width: 400px; }
   .section .section-title {
-    height: 37.5px;
     text-align: left;
     font-size: 20px;
     margin-bottom: 7.5px;
-    text-transform: lowercase; }
+    text-transform: lowercase;
+    height: 37.5px;
+    line-height: 35px;
+    width: 100%;
+    overflow: hidden; }
     @media (max-width: 640px) {
       .section .section-title {
         font-size: 18px; } }
@@ -3638,7 +3641,8 @@ button,
     .list-table.list-table--links-list tr .link-column .content .link.headline {
       text-decoration: underline;
       line-height: 20px;
-      padding-top: 0; }
+      padding-top: 0;
+      word-break: break-word; }
     .list-table.list-table--links-list tr .link-column .content .link-author {
       font-size: 13px;
       font-style: italic;
