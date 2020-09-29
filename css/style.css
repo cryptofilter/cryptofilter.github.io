@@ -3642,12 +3642,15 @@ button,
       text-decoration: underline;
       line-height: 20px;
       padding-top: 0;
+      padding-bottom: 5px;
       word-break: break-word; }
-    .list-table.list-table--links-list tr .link-column .content .link-author {
+    .list-table.list-table--links-list tr .link-column .content .link-author,
+    .list-table.list-table--links-list tr .link-column .content .link-domain {
+      margin-top: 5px;
       font-size: 13px;
-      font-style: italic;
       word-break: break-word; }
-      .list-table.list-table--links-list tr .link-column .content .link-author.no-horiz-padding {
+      .list-table.list-table--links-list tr .link-column .content .link-author.no-horiz-padding,
+      .list-table.list-table--links-list tr .link-column .content .link-domain.no-horiz-padding {
         padding-left: 7.5px;
         padding-right: 0; }
     .list-table.list-table--links-list tr .link-column .content p.description {

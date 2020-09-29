@@ -278,7 +278,8 @@ input.readonly {
         color: #a351e0; }
       .list-table.list-table--links-list .link-column .description a.no-state:visited {
         color: #1d90ee; }
-  .list-table.list-table--links-list .link-column .link-author {
+  .list-table.list-table--links-list .link-column .link-author,
+  .list-table.list-table--links-list .link-column .link-domain {
     color: #4e5c69; }
 
 .list-table.list-table--featured tr .link-column {

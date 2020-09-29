@@ -18608,9 +18608,16 @@ module.exports = `<section class="section section--no-border-box">
                 <a href="<%- item.linkUrl %>" class="link headline no-horiz-padding" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'Outbound Link Click', '<%- item.linkUrl %>']);">
                   <%- item.title %>
                 </a>
+
               <% if (item.author) { %>
                 <p class="link-author no-horiz-padding"><%- item.author %></p>
               <% } %>
+
+              <p class="link-domain no-horiz-padding">
+                <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
+                <%- domain %>
+              </p>
+
               </div>
           </td>
        <% if (i % 2 === 1) { %>
