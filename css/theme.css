@@ -267,8 +267,6 @@ input.readonly {
     border: 3px solid #000; }
   .list-table.list-table--links-list .link-column .description {
     color: #4e5c69; }
-    .list-table.list-table--links-list .link-column .description .date {
-      font-weight: bold; }
     .list-table.list-table--links-list .link-column .description a {
       font-family: Helvetica, Arial, sans-serif;
       color: #1d90ee; }
@@ -279,8 +277,18 @@ input.readonly {
       .list-table.list-table--links-list .link-column .description a.no-state:visited {
         color: #1d90ee; }
   .list-table.list-table--links-list .link-column .link-author,
-  .list-table.list-table--links-list .link-column .link-domain {
+  .list-table.list-table--links-list .link-column .link-domain,
+  .list-table.list-table--links-list .link-column .link-postedby-twitter-handle {
     color: #4e5c69; }
+  .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a {
+    font-family: Helvetica, Arial, sans-serif;
+    color: #1d90ee; }
+    .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:hover, .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:active {
+      color: #82c8f9; }
+    .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:visited {
+      color: #a351e0; }
+    .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a.no-state:visited {
+      color: #1d90ee; }
 
 .list-table.list-table--featured tr .link-column {
   border-bottom: none;

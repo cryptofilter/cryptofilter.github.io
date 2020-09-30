@@ -18478,6 +18478,14 @@ module.exports = `<div class="app-view column-container column-container--full">
                       </p>
                     <% } %>
 
+                    <% if (item.ethAddress) { %>
+                      <!-- only shows for curated links, not rss feeds -->
+                      <p class="link-domain no-horiz-padding">
+                        <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
+                        <%- domain %>
+                      </p>
+                    <% } %>
+
                     <% if (item.description) { %>
                       <p class="description no-horiz-padding">
                         <span class="date"><%- date %></span>
@@ -18485,6 +18493,17 @@ module.exports = `<div class="app-view column-container column-container--full">
                         <a href="<%- item.linkUrl %>">  (full story ↗)</a>
                       </p>
                     <% } %>
+
+                    <% if (item.twitterHandle && item.twitterHandle !== '_eljee') { %>
+                      <!-- only shows for curated links, not rss feeds -->
+                      <p class="link-postedby-twitter-handle no-horiz-padding">
+                        Posted by:
+                        <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
+                          @<%- item.twitterHandle %>
+                        </a>
+                      </p>
+                    <% } %>
+
                   </div>
 
               </td>

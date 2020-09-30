@@ -3645,16 +3645,18 @@ button,
       padding-bottom: 5px;
       word-break: break-word; }
     .list-table.list-table--links-list tr .link-column .content .link-author,
-    .list-table.list-table--links-list tr .link-column .content .link-domain {
+    .list-table.list-table--links-list tr .link-column .content .link-domain,
+    .list-table.list-table--links-list tr .link-column .content .link-postedby-twitter-handle {
       margin-top: 5px;
       font-size: 13px;
       word-break: break-word; }
       .list-table.list-table--links-list tr .link-column .content .link-author.no-horiz-padding,
-      .list-table.list-table--links-list tr .link-column .content .link-domain.no-horiz-padding {
+      .list-table.list-table--links-list tr .link-column .content .link-domain.no-horiz-padding,
+      .list-table.list-table--links-list tr .link-column .content .link-postedby-twitter-handle.no-horiz-padding {
         padding-left: 7.5px;
         padding-right: 0; }
     .list-table.list-table--links-list tr .link-column .content p.description {
-      font-size: 13.5px;
+      font-size: 13px;
       line-height: 18px;
       overflow: hidden;
       padding-top: 7.5px; }
