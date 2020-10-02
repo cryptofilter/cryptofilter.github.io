@@ -1474,7 +1474,7 @@ async function linkMetadata(url) {
         resolve(responseJson.metadata);
       }
     } catch (err) {
-      console.err(err.message);
+      console.error(err.message);
       return reject(new Error(`Link could not be found.`));
     }
   });
