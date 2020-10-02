@@ -18638,7 +18638,7 @@ module.exports = `<section class="section section--no-border-box">
 </table>
 
 <div class="see-all-curated">
-  <a href="curators-picks.html" class="btn btn-medium btn-see-all-curated" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'See All Click']);">
+  <a href="curators-picks" class="btn btn-medium btn-see-all-curated" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'See All Click']);">
     See all curator's picks
     <i class="fa fa-arrow-right" aria-hidden="true"></i>
   </a>
