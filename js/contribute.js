@@ -1248,17 +1248,18 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
       (metadata) => {
         console.log(metadata);
         clearAddLinkFormMetadataFields();
-        const title = metadata['og:title'] || title;
+        const title = metadata['twitter:title'] || metadata['title'] || metadata['og:title'] || title;
         console.log('title:', title);
         if (title) {
           selectors.addLinkTitleInputEl.value = domPurify.sanitize(title);
           showAddLinkFormError('');
         }
-        const author = metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
+        const author = metadata['twitter:creator'] || metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
+        console.log('author:', author);
         if (author) {
           selectors.addLinkAuthorInputEl.value = domPurify.sanitize(author);
         }
-        const imgUrl = metadata['og:image_secure_url'] || metadata['og:image'] || metadata['image'];
+        const imgUrl = metadata['twitter:image'] || metadata['og:image_secure_url'] || metadata['og:image'] || metadata['image'];
         console.log('imgUrl:', imgUrl);
         if (imgUrl && imgUrl.indexOf('https://') === 0) {
           selectors.addLinkImgContainerEl.innerHTML = '';
