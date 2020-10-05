@@ -3778,8 +3778,7 @@ body.static-page {
 /* Footer Nav -------------------------------- */
 .footer-nav {
   text-align: left;
-  margin: 30px;
-  margin-top: 90px; }
+  margin: 30px; }
   .footer-nav .footer-nav-inner {
     padding-top: 15px;
     text-align: center; }
