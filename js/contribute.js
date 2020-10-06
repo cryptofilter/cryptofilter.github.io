@@ -1315,6 +1315,8 @@ selectors.addLinkFormEl.addEventListener('submit', async (event) => {
     setTimeout(() => {
       resetAddLinkForm();
     }, 2500);
+    // Tweet about it (via Twitter API)
+    fetch.tweetCuratedLink(signedData, account, signature);
   } catch (err) {
     console.error('submit handler error: ', err.message);
     if (err.message === 'Disconnected') {
@@ -1449,7 +1451,8 @@ async function getSignature(signedDataJson) {
 },{"./../deps/lodash.4.17.15.js":5,"./fetch.js":3,"./selectors.js":4,"dompurify":1}],3:[function(require,module,exports){
 module.exports = {
   linkMetadata,
-  addLinkFormPost
+  addLinkFormPost,
+  tweetCuratedLink
 }
 
 async function linkMetadata(url) {
@@ -1520,6 +1523,47 @@ async function addLinkFormPost(signedData, account, signature) {
     }
 
   });
+}
+
+async function tweetCuratedLink(signedData, account, signature) {
+  console.log('--- fetch.tweetCuratedLink()');
+
+  const queryUrl = 'https://api.microsponsors.io/v1/tweet-curated-link';
+  const postData = {
+    linkUrl: signedData.linkUrl,
+    title: signedData.title,
+    author: signedData.author,
+    image: signedData.image,
+    timestamp: signedData.timestamp,
+    ethAddress: account,
+    signature: signature
+  }
+  console.log('postData', postData);
+
+  try {
+    const response = await fetch(queryUrl, {
+      method: 'POST',
+      cache: 'no-cache',
+      mode: 'cors',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: JSON.stringify(postData)
+    });
+    const responseJson = await response.json();
+
+    if (response.status !== 200 || responseJson.errorMessage) {
+      console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
+      console.log(responseJson);
+    } else {
+      console.log('Twitter API: Success');
+    }
+  } catch(err) {
+    console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
+    console.log(responseJson);
+  }
+
 }
 
 },{}],4:[function(require,module,exports){
