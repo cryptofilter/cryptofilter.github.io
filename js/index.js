@@ -18572,13 +18572,14 @@ function _handleStateChange(event) {
   console.log('  routeData:', routeData || '<none>');
   if (routeData) {
     route(_routeData);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 700);
+  // Otherwise re-route back home
   } else {
     selectors.appRoutesEl.textContent = '';
     selectors.appHomeEl.classList.remove('dnone');
   }
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 700);
 }
 
 },{"./deps/lodash.4.17.15.js":3,"./fetch.js":4,"./selectors.js":7,"./templates/headlines.js":9,"dompurify":1}],7:[function(require,module,exports){
