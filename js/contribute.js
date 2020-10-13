@@ -1224,6 +1224,7 @@
 const createDOMPurify = require('dompurify');
 
 const _ = require('./../deps/lodash.4.17.15.js');
+const utils = require('./../utils.js');
 const fetch = require('./fetch.js');
 const selectors = require('./selectors.js');
 
@@ -1251,13 +1252,13 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
         const title = metadata['twitter:title'] || metadata['title'] || metadata['og:title'] || title;
         console.log('title:', title);
         if (title) {
-          selectors.addLinkTitleInputEl.value = domPurify.sanitize(title);
+          selectors.addLinkTitleInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(title));
           showAddLinkFormError('');
         }
         const author = metadata['twitter:creator'] || metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
         console.log('author:', author);
         if (author) {
-          selectors.addLinkAuthorInputEl.value = domPurify.sanitize(author);
+          selectors.addLinkAuthorInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(author));
         }
         const imgUrl = metadata['twitter:image'] || metadata['og:image_secure_url'] || metadata['og:image'] || metadata['image'];
         console.log('imgUrl:', imgUrl);
@@ -1279,11 +1280,18 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
     );
 });
 
+// Add link form strip emoji & other special chars out of title, author fields
+// Special characters seem to mess up Metamask signatures
+selectors.addLinkInputStripEmoji.forEach((el) => {
+  el.addEventListener('input', (event) => {
+    event.target.value = utils.stripEmojiFromString(event.target.value);
+  });
+});
+
 // Add link form submit handler
 selectors.addLinkFormEl.addEventListener('submit', async (event) => {
   console.log('--- submit');
   event.preventDefault();
-
   // Get account from Metamask, have user sign data & POST to lambda
   try {
     const account = await getAccount();
@@ -1448,7 +1456,7 @@ async function getSignature(signedDataJson) {
 }
 
 
-},{"./../deps/lodash.4.17.15.js":5,"./fetch.js":3,"./selectors.js":4,"dompurify":1}],3:[function(require,module,exports){
+},{"./../deps/lodash.4.17.15.js":5,"./../utils.js":6,"./fetch.js":3,"./selectors.js":4,"dompurify":1}],3:[function(require,module,exports){
 module.exports = {
   linkMetadata,
   addLinkFormPost,
@@ -1575,6 +1583,7 @@ module.exports = {
   addLinkTitleInputEl: document.getElementById('js-input-add-link-title'),
   addLinkImgContainerEl: document.getElementById('js-form-add-link-img-container'),
   addLinkAuthorInputEl: document.getElementById('js-form-add-link-author'),
+  addLinkInputStripEmoji: document.querySelectorAll('.js-input-strip-emoji'),
   // Validation msgs
   addLinkFormErrorEl: document.getElementById('js-form-add-link-error'),
   addLinkFormSuccessEl: document.getElementById('js-form-add-link-success'),
@@ -18698,4 +18707,16 @@ module.exports = {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],6:[function(require,module,exports){
+module.exports = {
+  stripEmojiFromString
+}
+
+function stripEmojiFromString(str) {
+  // Strip Emoji and other special characters out of string
+  // Regex originally from LoDash lib
+  // https://thekevinscott.com/emojis-in-javascript/
+  return str.replace(/(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c\ude32-\ude3a]|[\ud83c\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])/gmi, '');
+}
+
 },{}]},{},[2]);
