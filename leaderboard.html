@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <title>Cryptofilter.XYZ - Contribute</title>
+    <title>Cryptofilter.XYZ - Leaderboard</title>
     <meta name="description" content="Your dashboard for hi-signal crypto / defi / web3 news + info.">
 
     <!-- Main stylesheet -->
@@ -82,50 +82,34 @@
       <div class="column-container column-container--two-one">
 
         <div class="column--two-thirds">
-
-          <section class="section">
-            <h2 class="section-title">🍒 Curators: Add a link</h2>
-
-            <p class="messaging margin-top-none">
-              Only approved curators can add links (for now). To become a curator, fill out the application on this page.
+          <section class="section section--no-border-box">
+            <h2 class="section-title section-title--border-bottom">
+              leaderboard
+            </h2>
+            <p class="messaging">
+              Each curator is awarded 100 points for applying and being accepted as a curator. Each link they submit is worth 5 points.
             </p>
-
-            <form id="js-form-add-link">
-
-              <input id="js-input-add-link" type="text" placeholder="paste url here" autofocus="true" />
-
-              <input id="js-input-add-link-title" class="js-input-strip-emoji" type="text" placeholder="title" maxlength="160" />
-
-              <input id="js-form-add-link-author" class="js-input-strip-emoji" type="text" placeholder="author" maxlength="50" />
-
-              <div id="js-form-add-link-img-container"></div>
-
-              <p id="js-form-add-link-error" class="err-msg"></p>
-              <p id="js-form-add-link-success" class="success-msg"></p>
-
-              <input type="submit" class="submit" value="Submit" />
-
-            </form>
+            <div id="js-leaderboard">
+              <!-- table gets inserted here -->
+            </div>
           </section>
-
+          <section class="section section--contrast section--no-box-shadow section--max-width-400">
+          
+            <h2 class="section-title">💡 want to be a curator?</h2>
+            <a name="apply"></a>
+          
+            <p class="messaging margin-top-none">
+              Want to help curate the news here?
+              Fill out the form below, it only takes a few minutes:
+            </p>
+          
+            <a class="typeform-share button" href="https://form.typeform.com/to/xyrKi4j0" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#000000;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:2px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Apply now </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
+          
+          </section>
         </div>
 
         <div class="column--one-third">
-
-            <section class="section section--contrast section--no-box-shadow section--max-width-400">
-            
-              <h2 class="section-title">💡 want to be a curator?</h2>
-              <a name="apply"></a>
-            
-              <p class="messaging margin-top-none">
-                Want to help curate the news here?
-                Fill out the form below, it only takes a few minutes:
-              </p>
-            
-              <a class="typeform-share button" href="https://form.typeform.com/to/xyrKi4j0" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#000000;color:white;cursor:pointer;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:2px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:bold;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Apply now </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
-            
-            </section>
-
+          &nbsp;
         </div>
 
       </div>
@@ -157,7 +141,7 @@
 
   <script
     type="text/javascript"
-    src="js/contribute.js"
+    src="js/leaderboard.js"
     async
   ></script>
 
