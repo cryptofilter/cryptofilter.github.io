@@ -3252,7 +3252,7 @@ button,
     padding: 7.5px;
     font-size: 15px; }
 
-/* General ----------------------------------- */
+/* Helpers ----------------------------------- */
 .error {
   display: none; }
 
@@ -3478,7 +3478,7 @@ button,
   right: 30px;
   width: auto;
   border-radius: 2px; }
-  @media (max-width: 640px) {
+  @media (max-width: 1024px) {
     .topnav {
       display: none; } }
   .topnav .topnav-inner {
@@ -3499,6 +3499,18 @@ button,
   font-size: 60px; }
   .spinner p {
     font-size: 14px; }
+
+/* Layout ------------------------------------ */
+.app-container {
+  padding-top: 145px; }
+  .app-container.dnone {
+    display: none; }
+  @media (max-width: 480px) {
+    .app-container {
+      padding-top: 130px; } }
+  @media (max-height: 480px) {
+    .app-container {
+      padding-top: 130px; } }
 
 /* Box Model ----------------------------------- */
 .column-container {
@@ -3702,17 +3714,15 @@ button,
     .list-table.list-table--featured tr .link-column img {
       margin-right: 7.5px; }
 
-/* Homepage ------------------------------------ */
-.app-container {
-  padding-top: 145px; }
-  .app-container.dnone {
-    display: none; }
-  @media (max-width: 480px) {
-    .app-container {
-      padding-top: 130px; } }
-  @media (max-height: 480px) {
-    .app-container {
-      padding-top: 130px; } }
+/* Leaderboard ------------------------------ */
+.leaderboard-table {
+  width: 100%;
+  margin-top: 30px; }
+  .leaderboard-table th, .leaderboard-table td {
+    padding: 7.5px 1.5%;
+    text-align: left; }
+    .leaderboard-table th.points, .leaderboard-table td.points {
+      width: 100px; }
 
 /* Static Content: -----------------------------
  * About
@@ -3792,7 +3802,7 @@ body.static-page {
 /* Footer Nav -------------------------------- */
 .footer-nav {
   text-align: left;
-  margin: 30px; }
+  margin: 90px 30px 30px 30px; }
   .footer-nav .footer-nav-inner {
     padding-top: 15px;
     text-align: center; }

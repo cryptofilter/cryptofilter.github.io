@@ -88,6 +88,17 @@ textarea, input, fieldset {
   color: #000;
   background-color: #FFF52E; }
 
+.link {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #1d90ee;
+  background: transparent; }
+  .link:hover, .link:active {
+    color: #82c8f9; }
+  .link:visited {
+    color: #a351e0; }
+  .link.no-state:visited {
+    color: #1d90ee; }
+
 /* Logo -------------------------------------- */
 .logo-container {
   background: #fff; }
@@ -299,6 +310,10 @@ input.readonly {
       border-top: 1px solid #4e5c69;
       background: transparent;
       box-shadow: none; } }
+
+/* Leaderboard ------------------------------ */
+.leaderboard-table {
+  font-family: Courier, monospace; }
 
 /* Static Content: -----------------------------
  * About
