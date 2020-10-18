@@ -313,7 +313,14 @@ input.readonly {
 
 /* Leaderboard ------------------------------ */
 .leaderboard-table {
-  font-family: Courier, monospace; }
+  font-family: Courier, monospace;
+  border: 2px solid #4e5c69; }
+  .leaderboard-table th {
+    color: #aaa;
+    border-bottom: 2px solid #aaa;
+    font-family: Helvetica, Arial, sans-serif; }
+  .leaderboard-table td {
+    border-bottom: 2px solid #eee; }
 
 /* Static Content: -----------------------------
  * About

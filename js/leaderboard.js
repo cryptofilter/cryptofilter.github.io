@@ -18399,7 +18399,7 @@ module.exports = `<table class="leaderboard-table">
 
   <tr>
     <th class="points">Points</th>
-    <th>Curator</th>
+    <th>Curator / Twitter Handle</th>
   </tr>
 
   <% leaderboard.forEach((item, i) => { %>
@@ -18408,7 +18408,7 @@ module.exports = `<table class="leaderboard-table">
       <td class="points"><%- item.totalPoints %></td>
       <td class="curator">
         <%- item.nickname %>
-        / <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
+        <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
           @<%- item.twitterHandle %>
         </a>
       </td>

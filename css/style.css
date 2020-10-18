@@ -3717,12 +3717,19 @@ button,
 /* Leaderboard ------------------------------ */
 .leaderboard-table {
   width: 100%;
-  margin-top: 30px; }
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 15px; }
   .leaderboard-table th, .leaderboard-table td {
-    padding: 7.5px 1.5%;
-    text-align: left; }
+    padding: 7.5px 15px;
+    text-align: left;
+    font-size: 14px;
+    line-height: 18px; }
     .leaderboard-table th.points, .leaderboard-table td.points {
       width: 100px; }
+  .leaderboard-table th {
+    padding-top: 15px;
+    padding-bottom: 15px; }
 
 /* Static Content: -----------------------------
  * About
