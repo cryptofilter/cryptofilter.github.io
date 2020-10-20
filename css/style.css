@@ -3245,12 +3245,18 @@ button,
   cursor: pointer; }
 
 .btn {
-  font-size: 13px;
-  padding: 5px;
-  border-radius: 3px; }
+  font-size: 16px;
+  padding: 15px 30px;
+  border-radius: 3px;
+  margin-top: 30px;
+  width: auto; }
   .btn.btn-medium {
     padding: 7.5px;
     font-size: 15px; }
+  .btn.btn-small {
+    font-size: 13px;
+    padding: 5px;
+    margin: 0; }
 
 /* Helpers ----------------------------------- */
 .error {
@@ -3576,7 +3582,8 @@ button,
     padding-top: 15px;
     margin-top: 7.5px; }
     .section .see-all-curated .btn-see-all-curated {
-      display: inline-block; }
+      display: inline-block;
+      margin-top: 0; }
       .section .see-all-curated .btn-see-all-curated .fa {
         margin-left: 7.5px; }
   .section p.messaging {
