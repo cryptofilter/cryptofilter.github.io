@@ -3636,8 +3636,8 @@ button,
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 15px;
-  padding-bottom: 15px; }
+  padding-top: 30px;
+  padding-bottom: 30px; }
   .list-table.list-table--links-list tr .link-column img {
     flex: 0 1 auto;
     width: 120px;
@@ -3656,6 +3656,9 @@ button,
       padding-top: 0;
       padding-bottom: 5px;
       word-break: break-word; }
+    .list-table.list-table--links-list tr .link-column .content .link-author,
+    .list-table.list-table--links-list tr .link-column .content .link-domain {
+      display: inline-block; }
     .list-table.list-table--links-list tr .link-column .content .link-author,
     .list-table.list-table--links-list tr .link-column .content .link-domain,
     .list-table.list-table--links-list tr .link-column .content .link-postedby-twitter-handle {
