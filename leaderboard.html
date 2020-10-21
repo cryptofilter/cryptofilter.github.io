@@ -73,9 +73,27 @@
           <a href="leaderboard" class="no-state">Leaderboard</a>
           <a href="about" class="no-state">About</a>
           <a href="https://twitter.com/CryptofilterXYZ" target="_blank">
-          <i class="fa fa-fw fa-2x fa-twitter"></i>
-        </a>
+            <i class="fa fa-fw fa-2x fa-twitter"></i>
+          </a>
       </div>
+    </div>
+    
+    <div class="burger" id="js-burger">
+      <span class="top"></span>
+      <span class="middle"></span>
+      <span class="bottom"></span>
+    </div>
+    
+    <div class="overlay collapsed" id="js-burger-overlay">
+      <a href="javascript:void(0);" class="close-overlay" id="js-burger-close-overlay"></a>
+      <a href="/" class="link no-state">Home</a>
+      <a href="curators-picks" class="link no-state">Curator's Picks</a>
+      <a href="contribute" class="link no-state">+ Add a Link</a>
+      <a href="leaderboard" class="link no-state">Leaderboard</a>
+      <a href="about" class="link no-state">About</a>
+      <a href="https://twitter.com/CryptofilterXYZ" target="_blank" class="link no-state">
+        <i class="fa fa-fw fa-2x fa-twitter"></i>
+      </a>
     </div>
 
     <div class="app-container">
@@ -171,6 +189,34 @@
       document.getElementById('js-logo-image').classList.remove('loading');
     }, 350);
   </script>
+
+  <script>
+  
+    const elBurger = document.getElementById('js-burger');
+    const elOverlay = document.getElementById('js-burger-overlay');
+    const elClose = document.getElementById('js-burger-close-overlay');
+  
+    elBurger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isCollapsed = elOverlay.classList.value.indexOf('collapsed') > 0;
+      console.log('isCollapsed', isCollapsed);
+      if (isCollapsed) {
+        elOverlay.classList.remove('collapsed');
+      }
+    });
+  
+    elClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('close click', elOverlay.classList);
+      const isCollapsed = elOverlay.classList.value.indexOf('collapsed') > 0;
+      console.log('isCollapsed', isCollapsed);
+      if (!isCollapsed) {
+        elOverlay.classList.add('collapsed');
+      }
+    });
+  
+  </script>
+
 
 </html>
 

@@ -46,12 +46,12 @@
 /* links */
 /* links hover */
 /* links hover bg color */
+/* Borders ----------------------------------- */
 /* Buttons ----------------------------------- */
 /* Box Styling ------------------------------- */
 /* Mixins ------------------------------------ */
 /* Burger */
 /* Hamburger Menu for Mobile */
-/* Header */
 /* Link Colors */
 /* Tags */
 .tag {
@@ -116,54 +116,30 @@ textarea, input, fieldset {
 
 /* Burger ------------------------------------ */
 .burger {
-  border: 1px solid #4e5c69;
-  background: #000; }
+  border: 1px solid #eee;
+  background: transparent; }
   .burger span.top,
   .burger span.middle,
   .burger span.bottom {
-    background-color: #3EA99E; }
+    background-color: #82c8f9; }
   .burger:hover span.top,
   .burger:hover span.middle,
   .burger:hover span.bottom {
-    background-color: #5CC4BE; }
+    background-color: #82c8f9; }
+  @media (max-width: 480px) {
+    .burger {
+      background: #fbfbfb; } }
 
 /* Overlay & Close Overlay ------------------- */
 .overlay {
-  color: #000;
-  background-color: #FFF; }
-  .overlay .overlay-title {
-    font-family: Courier, monospace;
-    font-weight: 700;
-    color: #FFF;
-    background-color: #000;
-    text-transform: uppercase; }
-    @media (max-width: 640px) {
-      .overlay .overlay-title {
-        font-weight: 400; } }
+  background-color: #000; }
+  .overlay .link {
+    color: #FFF; }
+    .overlay .link.no-state {
+      color: #FFF; }
 
-.close-overlay {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #AAA;
-  background: transparent;
-  border: none; }
-  .close-overlay:hover {
-    color: #FFF; }
-    .close-overlay:hover .fa-times {
-      background-color: #1d90ee; }
-  .close-overlay .fa-times {
-    background-color: #3EA99E;
-    color: #FFF; }
-  @media (max-width: 640px) {
-    .close-overlay {
-      color: #000; }
-      .close-overlay .fa-times {
-        color: #3EA99E;
-        background: transparent; }
-      .close-overlay:hover {
-        color: #000; }
-        .close-overlay:hover .fa-times {
-          background: transparent;
-          color: #5CC4BE; } }
+.close-overlay::before, .close-overlay::after {
+  background-color: #82c8f9; }
 
 /* Top Nav ------------------------------ */
 .topnav .topnav-inner a {

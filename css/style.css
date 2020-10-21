@@ -3281,9 +3281,12 @@ button,
 .logo-container {
   z-index: 50;
   position: fixed;
-  padding: 30px 15px;
   width: 100%;
-  overflow: visible; }
+  overflow: visible;
+  padding: 30px 15px; }
+  @media (max-width: 480px) {
+    .logo-container {
+      padding-right: 60px; } }
   .logo-container .logo-image {
     position: absolute;
     top: 32px;
@@ -3298,19 +3301,12 @@ button,
       .logo-container .logo-image {
         top: 35px;
         width: 37.5px; } }
-    @media (max-height: 480px) {
-      .logo-container .logo-image {
-        top: 35px;
-        width: 37.5px; } }
   .logo-container .logo {
     position: relative;
     margin-bottom: 0;
     line-height: 1;
     margin-left: 80px; }
     @media (max-width: 480px) {
-      .logo-container .logo {
-        margin-left: 66px; } }
-    @media (max-height: 480px) {
       .logo-container .logo {
         margin-left: 66px; } }
     .logo-container .logo a {
@@ -3324,157 +3320,119 @@ button,
       text-transform: lowercase;
       margin-left: -75px;
       padding-left: 75px; }
+      @media (max-width: 400px) {
+        .logo-container .logo a {
+          font-size: 25px; } }
+      @media (max-width: 320px) {
+        .logo-container .logo a {
+          font-size: 20px; } }
     .logo-container .logo .tagline {
       display: block;
       padding-top: 37.5px;
       text-align: left;
       width: auto;
-      font-size: 14px; }
+      font-size: 14px;
+      line-height: 17px; }
       @media (max-width: 480px) {
         .logo-container .logo .tagline {
-          font-size: 13px;
-          padding-top: 37.5px; } }
-      @media (max-height: 480px) {
+          font-size: 13px; } }
+      @media (max-width: 400px) {
         .logo-container .logo .tagline {
-          font-size: 13px;
-          padding-top: 37.5px; } }
+          font-size: 12px;
+          padding-top: 30px; } }
+      @media (max-width: 320px) {
+        .logo-container .logo .tagline {
+          padding-top: 27.5px; } }
 
 /* Burger ------------------------------------ */
 .burger {
-  display: block;
-  position: absolute;
-  top: 20px;
-  left: 7.5px;
+  display: none;
+  position: fixed;
+  z-index: 4000;
+  top: 35px;
+  right: 30px;
   width: 45px;
-  height: 35px;
+  height: 45px;
   text-transform: uppercase;
-  border-radius: 2px; }
-  @media (max-width: 640px) {
+  border-radius: 3px; }
+  @media (max-width: 1024px) {
     .burger {
       display: block; } }
-  @media (max-width: 480px) {
-    .burger {
-      top: 7.5px; } }
-  @media (max-width: 640px) {
-    .burger.mobile--pull-right {
-      left: initial;
-      right: 7.5px; } }
   .burger span {
     position: absolute;
-    top: 7px;
+    top: 10px;
     left: 6px;
     width: 30px;
     height: 4px;
     cursor: pointer;
     transition: all 100ms ease-in;
-    border-radius: 1px; }
+    border-radius: 2px; }
     .burger span.middle {
-      top: 14px; }
+      top: 20px; }
     .burger span.bottom {
-      top: 21px; }
-  .burger.burger-main-nav {
-    z-index: 4000;
-    position: fixed;
-    top: 30px;
-    left: 30px; }
-    @media (max-width: 480px) {
-      .burger.burger-main-nav {
-        left: initial;
-        right: 15px; } }
-    @media (max-height: 480px) {
-      .burger.burger-main-nav {
-        left: initial;
-        right: 15px; } }
+      top: 30px; }
+  @media (max-width: 480px) {
+    .burger {
+      width: 17.5px;
+      border-radius: 20px; }
+      .burger span {
+        width: 15px;
+        top: 5px;
+        left: 4px;
+        height: 7.5px;
+        width: 7.5px;
+        border-radius: 45px; }
+        .burger span.middle {
+          top: 18px; }
+        .burger span.bottom {
+          top: initial;
+          bottom: 5px; } }
 
 /* Overlay & Close Overlay ------------------- */
 .overlay {
   z-index: 5000;
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
   right: 0;
-  height: 100%;
-  transition: all 100ms ease-in; }
-  .overlay.has-overlay-title {
-    padding-top: 75px; }
-    @media (max-width: 480px) {
-      .overlay.has-overlay-title {
-        padding-top: 50px; } }
-  .overlay.hidden {
-    opacity: 0;
-    top: -500px;
-    height: 0%;
-    transition-delay: 100ms;
-    overflow: hidden; }
-    .overlay.hidden .overlay-title {
-      top: -500px; }
+  bottom: 0;
+  width: 100%;
+  transition: all 100ms ease-in;
+  padding-top: 120px; }
   .overlay.collapsed {
-    top: -1000px;
-    height: 0%;
+    right: -100px;
+    width: 0%;
     overflow: hidden;
     transition-delay: 200ms; }
-    .overlay.collapsed .overlay-title {
-      top: -500px; }
-  .overlay .overlay-title {
-    text-align: left;
-    text-transform: uppercase;
-    font-size: 40px;
-    line-height: 60px;
-    height: 75px;
-    padding: 5px 90px 0 15px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    z-index: 4001;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    cursor: pointer;
-    transition: all 100ms ease-in;
-    transition-duration: 200ms; }
-    @media (max-width: 768px) {
-      .overlay .overlay-title {
-        font-size: 30px; } }
-    @media (max-width: 640px) {
-      .overlay .overlay-title {
-        font-size: 24px; } }
-    @media (max-width: 480px) {
-      .overlay .overlay-title {
-        height: 50px;
-        line-height: 35px;
-        padding-top: 7.5px;
-        font-size: 21px; } }
+  .overlay .link {
+    display: block;
+    padding: 0 15px 0 30px;
+    font-size: 18px;
+    line-height: 40px;
+    text-decoration: underline; }
+    .overlay .link .fa {
+      margin-top: 30px; }
 
 .close-overlay {
   display: block;
   position: absolute;
-  top: 10px;
-  right: 15px;
-  padding-right: 57px;
-  font-size: 15px;
-  line-height: 50px;
-  text-transform: lowercase;
-  transition: all 100ms ease-in; }
-  .close-overlay .fa-times {
+  top: 35px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  transition: all 100ms ease-in;
+  border-radius: 150px; }
+  .close-overlay::before, .close-overlay::after {
+    height: 4px;
+    width: 80%;
+    border-radius: 2px;
+    content: "";
+    display: block;
     position: absolute;
-    top: 2px;
-    right: 0;
-    font-size: 40px;
-    transition: all 100ms ease-in;
-    line-height: 50px;
-    border-radius: 2px; }
-  @media (max-width: 480px) {
-    .close-overlay {
-      top: 5px;
-      right: 7px;
-      font-size: 15px;
-      line-height: 35px;
-      padding-right: 45px; }
-      .close-overlay .fa-times {
-        top: 0;
-        font-size: 30px;
-        line-height: 37.5px; } }
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg); }
+  .close-overlay::after {
+    transform: translateX(-50%) translateY(-50%) rotate(-45deg); }
 
 /* Top Nav ------------------------------ */
 .topnav {
@@ -3483,7 +3441,7 @@ button,
   top: 22.5px;
   right: 30px;
   width: auto;
-  border-radius: 2px; }
+  border-radius: 3px; }
   @media (max-width: 1024px) {
     .topnav {
       display: none; } }
@@ -3720,7 +3678,8 @@ button,
     border-radius: 2px; }
     @media (max-width: 1024px) {
       .list-table.list-table--featured tr .link-column {
-        width: 100%; } }
+        width: 100%;
+        border-radius: 0; } }
     .list-table.list-table--featured tr .link-column img {
       margin-right: 7.5px; }
 
