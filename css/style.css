@@ -3397,7 +3397,7 @@ button,
   bottom: 0;
   width: 100%;
   transition: all 100ms ease-in;
-  padding-top: 120px; }
+  padding-top: 90px; }
   .overlay.collapsed {
     right: -100px;
     width: 0%;
@@ -3530,6 +3530,8 @@ button,
     @media (max-width: 640px) {
       .section .section-title {
         font-size: 18px; } }
+    .section .section-title.margin-top {
+      margin-top: 60px; }
     .section .section-title i {
       margin-right: 5px; }
     .section .section-title .subtitle {

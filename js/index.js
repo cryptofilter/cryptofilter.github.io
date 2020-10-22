@@ -18519,11 +18519,11 @@ function routeToHomepage () {
 // Private helpers ----------
 
 function _encodeLabel(input) {
-  return encodeURIComponent(input.toLowerCase().replace(/ /g, '-'))
+  return encodeURI(input.toLowerCase().replace(/ /g, '-'))
 }
 
 function _decodeLabel(input) {
-  return decodeURIComponent(input.toLowerCase().replace(/-/g, ' '))
+  return decodeURI(input.toLowerCase().replace(/-/g, ' '))
 }
 
 function _getValidRouteData() {
@@ -18655,93 +18655,121 @@ module.exports = `<section class="section section--no-border-box">
 
 
 },{}],9:[function(require,module,exports){
-module.exports = `<div class="app-view column-container column-container--full">
-<div class="column--full">
-  <section class="section section--no-border-box">
-    <h2 class="section-title section-title--border-bottom">
-      <%= label %>
-      <span class="subtitle">latest headlines</a>
-    </h2>
-    <table class="list-table list-table--no-theme list-table--links-list">
+module.exports = `<div class="app-view column-container column-container--two-one">
 
-      <% if (feed === 'loading') { %>
+  <div class="column--two-thirds">
+    <section class="section section--no-border-box">
+      <h2 class="section-title section-title--border-bottom">
+        <%= label %>
+        <span class="subtitle">latest headlines</a>
+      </h2>
+      <table class="list-table list-table--no-theme list-table--links-list">
 
-        <div class="spinner">
-          <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-        </div>
+        <% if (feed === 'loading') { %>
 
-      <% } else if (feed === 'error') { %>
+          <div class="spinner">
+            <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+          </div>
 
-        <div class="spinner err-msg">
-          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          <p class="err-msg-p">Error. Try again!</p>
-        </div>
+        <% } else if (feed === 'error') { %>
 
-      <% } else {
+          <div class="spinner err-msg">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            <p class="err-msg-p">Error. Try again!</p>
+          </div>
 
-        feed.items.forEach((item) => {
-          const dateTime = item.date && new Date(item.date) ? formatTimestamp(item.date) + ' - ' : '';
-          const trimmedDesc = item.description ? item.description.substr(0, 300) : '';
-          const ellipses = item.description && item.description.length >= 300 ? '...' : '';
-          const curatedAtDateTime = item.timestampAdded && new Date(item.timestampAdded) ? '- ' + formatTimestamp(item.timestampAdded) : '';
-          %>
-            <tr>
-              <td class="link-column">
+        <% } else {
 
-                  <% if (item.image) { %>
-                    <a href="<%- item.linkUrl %>">
-                      <img src="<%- item.image %>" />
-                    </a>
-                  <% } %>
+          feed.items.forEach((item) => {
+            const dateTime = item.date && new Date(item.date) ? formatTimestamp(item.date) + ' - ' : '';
+            const trimmedDesc = item.description ? item.description.substr(0, 300) : '';
+            const ellipses = item.description && item.description.length >= 300 ? '...' : '';
+            const curatedAtDateTime = item.timestampAdded && new Date(item.timestampAdded) ? '- ' + formatTimestamp(item.timestampAdded) : '';
+            %>
+              <tr>
+                <td class="link-column">
 
-                  <div class="content">
-                    <a href="<%- item.linkUrl %>" class="link headline no-horiz-padding">
-                      <%- item.title %>
-                    </a>
-
-                    <% if (item.author) { %>
-                      <p class="link-author no-horiz-padding">
-                        By: <%- item.author %>
-                      </p>
+                    <% if (item.image) { %>
+                      <a href="<%- item.linkUrl %>">
+                        <img src="<%- item.image %>" />
+                      </a>
                     <% } %>
 
-                    <% if (item.ethAddress) { %>
-                      <!-- only shows for curated links, not rss feeds -->
-                      <p class="link-domain no-horiz-padding">
-                        <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
-                        <%- domain %>
-                      </p>
-                    <% } %>
+                    <div class="content">
+                      <a href="<%- item.linkUrl %>" class="link headline no-horiz-padding">
+                        <%- item.title %>
+                      </a>
 
-                    <% if (item.description) { %>
-                      <p class="description no-horiz-padding">
-                        <span class="date"><%- dateTime %></span>
-                        <%- trimmedDesc %><%- ellipses %>
-                        <a href="<%- item.linkUrl %>">  (full story ↗)</a>
-                      </p>
-                    <% } %>
+                      <% if (item.author) { %>
+                        <p class="link-author no-horiz-padding">
+                          By: <%- item.author %>
+                        </p>
+                      <% } %>
 
-                    <% if (item.twitterHandle) { %>
-                      <!-- only displayed for curated links, not rss feeds -->
-                      <p class="link-postedby-twitter-handle no-horiz-padding">
-                        Curated by:
-                        <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
-                          @<%- item.twitterHandle %>
-                        </a>
-                        <%- curatedAtDateTime %>
-                      </p>
-                    <% } %>
+                      <% if (item.ethAddress) { %>
+                        <!-- only shows for curated links, not rss feeds -->
+                        <p class="link-domain no-horiz-padding">
+                          <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
+                          <%- domain %>
+                        </p>
+                      <% } %>
 
-                  </div>
+                      <% if (item.description) { %>
+                        <p class="description no-horiz-padding">
+                          <span class="date"><%- dateTime %></span>
+                          <%- trimmedDesc %><%- ellipses %>
+                          <a href="<%- item.linkUrl %>">  (full story ↗)</a>
+                        </p>
+                      <% } %>
 
-              </td>
-            </tr>
+                      <% if (item.twitterHandle) { %>
+                        <!-- only displayed for curated links, not rss feeds -->
+                        <p class="link-postedby-twitter-handle no-horiz-padding">
+                          Curated by:
+                          <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
+                            @<%- item.twitterHandle %>
+                          </a>
+                          <%- curatedAtDateTime %>
+                        </p>
+                      <% } %>
 
-        <% });  } %>
+                    </div>
 
-    </table>
-  </section>
-</div>
+                </td>
+              </tr>
+
+          <% });  } %>
+
+      </table>
+    </section>
+  </div>
+
+  <div class="column--one-third">
+
+    <% if (window.location.pathname === '/curators-picks') { %>
+      <!-- only shows for curated links, not rss feeds -->
+      <section class="section section--contrast section--no-box-shadow section--max-width-400">
+        <h2 class="section-title">👉 how this works</h2>
+        <p class="messaging margin-top-none">
+          Curious about curation?
+          There's a quick explainer
+          on the <a href="about#curation" class="link no-state">About</a> page.
+        </p>
+      </section>
+    <% } else { %>
+      <section class="section section--contrast section--no-box-shadow section--max-width-400">
+        <h2 class="section-title">
+          <i class="fa fa-fw fa-2x fa-twitter"></i>
+        </h2>
+        <p class="messaging">
+          We're <a href="https://twitter.com/CryptofilterXYZ" class="link no-state">@CryptofilterXYZ</a> on Twitter.
+          You know what to do.
+        </p>
+      </section>
+    <% } %>
+
+  </div>
+
 </div>`;
 
 
