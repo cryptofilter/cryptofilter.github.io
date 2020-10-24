@@ -1255,7 +1255,7 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
           selectors.addLinkTitleInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(title));
           showAddLinkFormError('');
         }
-        const author = metadata['twitter:creator'] || metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
+        const author = getAuthorFromJsonLd(metadata) || metadata['twitter:creator'] || metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
         console.log('author:', author);
         if (author) {
           selectors.addLinkAuthorInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(author));
@@ -1455,6 +1455,26 @@ async function getSignature(signedDataJson) {
   });
 }
 
+
+// One-off fn for scraping author from JSON-LD format
+// returned with metadata call
+
+function getAuthorFromJsonLd(metadata) {
+  let author = '';
+  if (metadata && metadata.jsonld) {
+    // Coindesk format:
+    if (metadata.jsonld.author) {
+      if (metadata.jsonld.author && _.isArray(metadata.jsonld.author)) {
+        author = metadata.jsonld.author.join(' ');
+      }
+    }
+    // The Block format:
+    if (metadata.jsonld['@graph'] && metadata.jsonld['@graph'] && metadata.jsonld['@graph'][5] && metadata.jsonld['@graph'][5].name) {
+      author = metadata.jsonld['@graph'][5].name;
+    }
+  }
+  return author;
+}
 
 },{"./../deps/lodash.4.17.15.js":5,"./../utils.js":6,"./fetch.js":3,"./selectors.js":4,"dompurify":1}],3:[function(require,module,exports){
 module.exports = {
