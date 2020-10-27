@@ -1468,6 +1468,14 @@ function getAuthorFromJsonLd(metadata) {
         author = metadata.jsonld.author.join(' ');
       }
     }
+    // Cointelegraph format:
+    if (metadata.jsonld['author'] && metadata.jsonld['author'].name) {
+      author = metadata.jsonld['author'].name;
+    }
+    // ModernConsensus format:
+    if (metadata.jsonld['@graph'] && metadata.jsonld['@graph'] && metadata.jsonld['@graph'][3] && metadata.jsonld['@graph'][3].name) {
+      author = metadata.jsonld['@graph'][3].name;
+    }
     // The Block format:
     if (metadata.jsonld['@graph'] && metadata.jsonld['@graph'] && metadata.jsonld['@graph'][5] && metadata.jsonld['@graph'][5].name) {
       author = metadata.jsonld['@graph'][5].name;
