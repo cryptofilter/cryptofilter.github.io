@@ -279,7 +279,7 @@ input.readonly {
 
 .list-table.list-table--featured tr .link-column {
   border-bottom: none;
-  background: #fbfbfb;
+  background: #FFF;
   box-shadow: 1px 1px 3px #bbb; }
   @media (max-width: 1024px) {
     .list-table.list-table--featured tr .link-column {
