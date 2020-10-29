@@ -18352,24 +18352,27 @@ const domPurify = createDOMPurify(window);
 
 
 // Define Selector, Init ---
-const elLeaderboard = document.getElementById('js-leaderboard');
-populate();
+const elAuthorLeaderboard = document.getElementById('js-author-leaderboard');
+populateLeaderboard('author', elAuthorLeaderboard);
+
+const elCuratorLeaderboard = document.getElementById('js-curator-leaderboard');
+populateLeaderboard('curator', elCuratorLeaderboard);
 
 
 // Fns ---------------------
-async function populate() {
-  const data = await fetchLeaderboard();
-  console.log('leaderboard data', data);
+async function populateLeaderboard(role, el) {
+  const data = await fetchLeaderboard(role);
+  console.log(`${role} leaderboard data`, data);
   const compiler = _.template(template);
-  elLeaderboard.innerHTML = domPurify.sanitize(compiler(data));
+  el.innerHTML = domPurify.sanitize(compiler(data));
 }
 
-async function fetchLeaderboard() {
+async function fetchLeaderboard(role) {
   console.log('--- fetchLeaderboard()');
 
   return new Promise(async (resolve, reject) => {
 
-    const queryUrl = 'https://api.microsponsors.io/v1/cryptofilter-leaderboard';
+    const queryUrl = 'https://api.microsponsors.io/v1/cryptofilter-leaderboard?role=' + role;
     try {
       const response = await fetch(queryUrl, {
         method: 'GET',
@@ -18399,7 +18402,7 @@ module.exports = `<table class="leaderboard-table">
 
   <tr>
     <th class="points">Points</th>
-    <th>Curator / Twitter Handle</th>
+    <th><%- role %> / Twitter Handle</th>
   </tr>
 
   <% leaderboard.forEach((item, i) => { %>
@@ -18407,10 +18410,15 @@ module.exports = `<table class="leaderboard-table">
     <tr index="<%- i %>">
       <td class="points"><%- item.totalPoints %></td>
       <td class="curator">
+
         <%- item.nickname %>
-        <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
-          @<%- item.twitterHandle %>
-        </a>
+
+        <% if (item.twitterHandle) { %>
+          <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
+            @<%- item.twitterHandle %>
+          </a>
+        <% } %>
+
       </td>
     </tr>
 

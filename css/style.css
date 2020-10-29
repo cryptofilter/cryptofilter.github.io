@@ -3258,7 +3258,7 @@ button,
     padding: 5px;
     margin: 0; }
 
-/* Helpers ----------------------------------- */
+/* General ----------------------------------- */
 .error {
   display: none; }
 
@@ -3276,6 +3276,25 @@ button,
 
 .center {
   text-align: center; }
+
+.anchor-tag {
+  position: relative;
+  top: -130px; }
+
+.subtitle {
+  font-size: 12px;
+  font-weight: normal; }
+
+.link.tall {
+  line-height: 26px; }
+
+ul.bullet-list {
+  list-style-type: disc;
+  margin-top: 7.5px;
+  margin-bottom: 7.5px;
+  margin-left: 15px; }
+  ul.bullet-list li {
+    list-style-type: disc; }
 
 /* Logo -------------------------------------- */
 .logo-container {
@@ -3397,7 +3416,7 @@ button,
   bottom: 0;
   width: 100%;
   transition: all 100ms ease-in;
-  padding-top: 90px; }
+  padding-top: 75px; }
   .overlay.collapsed {
     right: -100px;
     width: 0%;
@@ -3484,8 +3503,18 @@ button,
   align-items: flex-start; }
   .column-container.column-container--full {
     margin: 0 30px; }
+    .column-container.column-container--full.no-flex {
+      display: block; }
     .column-container.column-container--full .column--full {
       width: 100%; }
+    .column-container.column-container--full .column--three-fourths {
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left; }
+      @media (max-width: 1024px) {
+        .column-container.column-container--full .column--three-fourths {
+          width: 100%; } }
   .column-container.column-container--two-one {
     margin: 0 30px; }
     .column-container.column-container--two-one .column--two-thirds {
@@ -3495,14 +3524,32 @@ button,
       flex: 0 1 auto;
       padding-left: 45px;
       min-width: 345px; }
+  .column-container.column-container--halves {
+    margin: 0 30px; }
+    .column-container.column-container--halves .column--one-half {
+      flex: 1 1 auto;
+      align-self: auto;
+      max-width: 50%; }
+      .column-container.column-container--halves .column--one-half:first-child {
+        padding-right: 30px; }
+      .column-container.column-container--halves .column--one-half:last-child {
+        padding-left: 30px; }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .column-container {
     display: block;
     flex: none; }
     .column-container.column-container--two-one .column--one-third {
       min-width: 0;
-      padding-left: 0; } }
+      padding-left: 0; }
+    .column-container.column-container--halves .column--one-half {
+      padding-left: 0;
+      padding-right: 0;
+      max-width: 100%; }
+      .column-container.column-container--halves .column--one-half:first-child {
+        padding-right: 0; }
+      .column-container.column-container--halves .column--one-half:last-child {
+        padding-left: 0; } }
 
 /* Sections ------------------------------------ */
 .section {
@@ -3535,8 +3582,6 @@ button,
     .section .section-title i {
       margin-right: 5px; }
     .section .section-title .subtitle {
-      font-size: 12px;
-      font-weight: normal;
       margin-left: 7.5px; }
   .section .see-all-curated {
     padding-top: 15px;
@@ -3546,17 +3591,22 @@ button,
       margin-top: 0; }
       .section .see-all-curated .btn-see-all-curated .fa {
         margin-left: 7.5px; }
-  .section p.messaging {
+  .section .messaging {
     margin-top: 30px;
     margin-bottom: 30px;
     font-size: 16px;
     line-height: 22px;
     max-width: 600px; }
-    .section p.messaging.margin-top-none {
+    .section .messaging.margin-top-none {
       margin-top: 0; }
-    .section p.messaging .ital {
+    .section .messaging.min-height-120 {
+      min-height: 120px; }
+      @media (max-width: 1024px) {
+        .section .messaging.min-height-120 {
+          min-height: auto; } }
+    .section .messaging .ital {
       font-style: italic; }
-    .section p.messaging .bold {
+    .section .messaging .bold {
       font-weight: bold; }
 
 /* List Table --------------------------- */
@@ -3671,6 +3721,11 @@ button,
   @media (max-width: 1024px) {
     .list-table.list-table--featured tr {
       flex-flow: column nowrap; } }
+  .list-table.list-table--featured tr .subtitle {
+    margin-bottom: 15px;
+    font-size: 13px; }
+    .list-table.list-table--featured tr .subtitle span {
+      margin-right: 15px; }
   .list-table.list-table--featured tr .link-column {
     width: 48.5%;
     flex: 0 1 auto;
@@ -3697,8 +3752,10 @@ button,
     font-size: 14px;
     line-height: 18px; }
     .leaderboard-table th.points, .leaderboard-table td.points {
-      width: 100px; }
+      width: 90px; }
   .leaderboard-table th {
+    font-size: 11px;
+    text-transform: uppercase;
     padding-top: 15px;
     padding-bottom: 15px; }
 

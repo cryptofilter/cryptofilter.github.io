@@ -1222,8 +1222,6 @@
 const createDOMPurify = require('dompurify');
 
 const _ = require('./deps/lodash.4.17.15.js');
-const fetch = require('./fetch.js');
-const selectors = require('./selectors.js');
 const template = require('./templates/curators-picks-section.js');
 const utils = require('./utils.js');
 
@@ -1240,20 +1238,45 @@ const domPurify = createDOMPurify(window);
 // Template Settings -------
 _.templateSettings.imports.formatTimestamp = utils.formatTimestamp;
 
-// Exported fns ------------
+// Cache El ----------------
+const elCuratorsPicksSection = document.getElementById('js-curators-picks-section');
+
+
+// Exported fn ------------
 async function populate() {
-  const data = await fetch.curatedLinks();
+  const data = await fetchCuratedLinks(50);
   console.log('curatedLinks', data);
 
   const compiler = _.template(template);
-  selectors.curatorsPicksSection.innerHTML = domPurify.sanitize(compiler(data));
+  elCuratorsPicksSection.innerHTML = domPurify.sanitize(compiler(data));
 
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 700);
 }
 
-},{"./deps/lodash.4.17.15.js":3,"./fetch.js":4,"./selectors.js":7,"./templates/curators-picks-section.js":8,"./utils.js":10,"dompurify":1}],3:[function(require,module,exports){
+// Fetch -----------------
+async function fetchCuratedLinks(num) {
+  console.log('--- fetch.curatedLinks()', num);
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const limit = num || 6;
+      const url = `https://api.microsponsors.io/v1/fetch-curated-links?limit=${limit}`;
+      const response = await fetch(url, {
+        method: 'GET',
+        cache: 'no-cache',
+        mode: 'cors',
+        credentials: 'omit'
+      });
+      resolve(response.json());
+    } catch (err) {
+      reject();
+    }
+  });
+}
+
+},{"./deps/lodash.4.17.15.js":3,"./templates/curators-picks-section.js":5,"./utils.js":6,"dompurify":1}],3:[function(require,module,exports){
 (function (global){
 // https://raw.githubusercontent.com/lodash/lodash/4.17.15-npm/lodash.js
 
@@ -18372,231 +18395,24 @@ async function populate() {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],4:[function(require,module,exports){
-module.exports = {
-  rssFeed,
-  curatedLinks
-}
-
-async function rssFeed(feedUrl) {
-  console.log('--- fetch.rssFeed()');
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const url = 'https://api.microsponsors.io/v1/fetch-rss-feed?url=' + feedUrl;
-      const response = await fetch(url, {
-        method: 'GET',
-        cache: 'no-cache',
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      resolve(response.json());
-    } catch (err) {
-      reject();
-    }
-  });
-}
-
-async function curatedLinks(num) {
-  console.log('--- fetch.curatedLinks()', num);
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const limit = num || 6;
-      const url = `https://api.microsponsors.io/v1/fetch-curated-links?limit=${limit}`;
-      const response = await fetch(url, {
-        method: 'GET',
-        cache: 'no-cache',
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      resolve(response.json());
-    } catch (err) {
-      reject();
-    }
-  });
-}
-
-},{}],5:[function(require,module,exports){
 // Dependencies are bundled via browserify
 // Will not leak into global scope
 const _ = require('./deps/lodash.4.17.15.js');
 const curatorsPicksSection = require('./curators-picks-section.js');
-const router = require('./router.js');
-const selectors = require('./selectors.js');
 
 console.log('--- cryptofilter.xyz ---');
 console.log(`  lodash dep injected:`, _ || 'undefined');
 
-
-// Start the router
-router.start();
-
-
 // Populate curated links
 curatorsPicksSection.populate();
 
-
-// Attach event listener & handler:
-selectors.headlineBtnEls.forEach((d) => {
-
-  d.addEventListener('click', (event) => {
-    console.log('clicked', event.target.getAttribute('data-feed-url'));
-    event.preventDefault();
-
-    const label = event.target.getAttribute('data-label');
-    const feedUrl = event.target.getAttribute('data-feed-url');
-    const link = event.target.getAttribute('data-link');
-    const contentType = event.target.getAttribute('data-content-type');
-
-    router.route({ label, link, feedUrl, contentType });
-
-    window.scrollTo(0, 0);
-  });
-});
-
-
-},{"./curators-picks-section.js":2,"./deps/lodash.4.17.15.js":3,"./router.js":6,"./selectors.js":7}],6:[function(require,module,exports){
-const createDOMPurify = require('dompurify');
-const _ = require('./deps/lodash.4.17.15.js');
-const headlinesTemplates = require('./templates/headlines.js');
-const fetch = require('./fetch.js');
-const selectors = require('./selectors.js');
-
-// Routes: ------------------
-// https://cryptofilter.xyz/#the-defiant-newsletter
-//                          #<label>-<contentType>
-
-module.exports = {
-  start,
-  route,
-  routeToHomepage
-};
-
-// Init DOMPurify ----------
-const domPurify = createDOMPurify(window);
-
-
-// Public fns ---------------
-
-function start() {
-  console.log('--- router.start()');
-
-  // Attach listener to handle back button events, etc
-  window.onpopstate = _handleStateChange;
-
-  // Check if we're in a valid route path for headlines view:
-  const routeData = _getValidRouteData();
-  if (routeData) {
-    route(_routeData);
-  }
-}
-
-
-async function route (newState) {
-  console.log('--- router.route()', newState);
-
-  _render(newState, { feed: 'loading' });
-  _route(newState);
-
-  try {
-    const data = await fetch.rssFeed(newState.feedUrl);
-    _render(newState, data);
-
-  } catch (e) {
-    _render(newState, { feed: 'error' });
-  }
-}
-
-
-function routeToHomepage () {
-  console.log('--- router.routeToHomepage()');
-  const url = window.location.toString().replace(/#.*/gi, '');
-  window.history.pushState({}, '', url);
-  _handleStateChange();
-}
-
-
-// Private helpers ----------
-
-function _encodeLabel(input) {
-  return encodeURI(input.toLowerCase().replace(/ /g, '-'))
-}
-
-function _decodeLabel(input) {
-  return decodeURI(input.toLowerCase().replace(/-/g, ' '))
-}
-
-function _getValidRouteData() {
-  // Read the hash and render the correct template if it
-  // matches a button label we've cached during init sequence
-  const rawHash = window.location.hash.replace(/#/g, '');
-  const routeDetected = _decodeLabel(rawHash);
-  console.log('  rawHash:', rawHash || '<none>');
-  console.log('  routeDetected:', routeDetected || '<none>');
-  // If hash matches a headlineBtn label, show it
-  selectors.headlineBtnEls.forEach((d) => {
-    const label = d.getAttribute('data-label');
-    const link = d.getAttribute('data-link');
-    const feedUrl = d.getAttribute('data-feed-url');
-    const contentType = d.getAttribute('data-content-type');
-    const btnRoute = `${label.toLowerCase()} ${contentType.toLowerCase()}`;
-    if (routeDetected === btnRoute) {
-      console.log('  route match: ', routeDetected);
-      route({ label, link, feedUrl, contentType });
-    }
-  });
-}
-
-function _route(newState) {
-  const state = newState;
-  const title = newState.label;
-  const loc = window.location.toString().replace(/#.*/gi, '');
-  const url = loc + `#${_encodeLabel(newState.label)}-${newState.contentType}`;
-  console.log('--- router._route()');
-  console.log('  state:', state);
-  console.log('  title:', title);
-  console.log('  url:', url);
-  window.history.pushState(state, title, url);
-}
-
-function _render(newState, data) {
-  // Compile templates & inject into dom
-  const compiler = _.template(headlinesTemplates);
-  const _data = Object.assign({}, newState, data);
-  // Hide homepage view
-  selectors.appHomeEl.classList.add('dnone');
-  // Insert *sanitized* compiled view
-  selectors.appRoutesEl.innerHTML = domPurify.sanitize(compiler(_data));
-}
-
-function _handleStateChange(event) {
-  console.log(`--- router._handleStateChange()`, event);
-  // Check if we're in a valid route path for headlines view:
-  const routeData = _getValidRouteData();
-  console.log('  routeData:', routeData || '<none>');
-  if (routeData) {
-    route(_routeData);
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 700);
-  // Otherwise re-route back home
-  } else {
-    selectors.appRoutesEl.textContent = '';
-    selectors.appHomeEl.classList.remove('dnone');
-  }
-}
-
-},{"./deps/lodash.4.17.15.js":3,"./fetch.js":4,"./selectors.js":7,"./templates/headlines.js":9,"dompurify":1}],7:[function(require,module,exports){
-module.exports = {
-  appHomeEl: document.getElementById('js-app-home'),
-  appRoutesEl: document.getElementById('js-app-routes'),
-  headlineBtnEls: document.querySelectorAll('.js-btn-headlines'),
-  curatorsPicksSection: document.getElementById('js-curators-picks-section')
-}
-
-},{}],8:[function(require,module,exports){
+},{"./curators-picks-section.js":2,"./deps/lodash.4.17.15.js":3}],5:[function(require,module,exports){
 module.exports = `<section class="section section--no-border-box">
 <table class="list-table list-table--links-list list-table--featured">
+
+  <tr>
+    <th class="subtitle"><span>🕑</span>latest headlines:</th>
+  </tr>
 
   <%  items.forEach((item, i) => { %>
 
@@ -18644,136 +18460,19 @@ module.exports = `<section class="section section--no-border-box">
 
 </table>
 
+<!--
 <div class="see-all-curated">
   <a href="curators-picks" class="btn btn-see-all-curated" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'See All Click']);">
     See all curator's picks
     <i class="fa fa-arrow-right" aria-hidden="true"></i>
   </a>
 </div>
+-->
 
 </section>`;
 
 
-},{}],9:[function(require,module,exports){
-module.exports = `<div class="app-view column-container column-container--two-one">
-
-  <div class="column--two-thirds">
-    <section class="section section--no-border-box">
-      <h2 class="section-title section-title--border-bottom">
-        <%= label %>
-        <span class="subtitle">latest headlines</a>
-      </h2>
-      <table class="list-table list-table--no-theme list-table--links-list">
-
-        <% if (feed === 'loading') { %>
-
-          <div class="spinner">
-            <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-          </div>
-
-        <% } else if (feed === 'error') { %>
-
-          <div class="spinner err-msg">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            <p class="err-msg-p">Error. Try again!</p>
-          </div>
-
-        <% } else {
-
-          feed.items.forEach((item) => {
-            const dateTime = item.date && new Date(item.date) ? formatTimestamp(item.date) + ' - ' : '';
-            const trimmedDesc = item.description ? item.description.substr(0, 300) : '';
-            const ellipses = item.description && item.description.length >= 300 ? '...' : '';
-            const curatedAtDateTime = item.timestampAdded && new Date(item.timestampAdded) ? '- ' + formatTimestamp(item.timestampAdded) : '';
-            %>
-              <tr>
-                <td class="link-column">
-
-                    <% if (item.image) { %>
-                      <a href="<%- item.linkUrl %>">
-                        <img src="<%- item.image %>" />
-                      </a>
-                    <% } %>
-
-                    <div class="content">
-                      <a href="<%- item.linkUrl %>" class="link headline no-horiz-padding">
-                        <%- item.title %>
-                      </a>
-
-                      <% if (item.author) { %>
-                        <p class="link-author no-horiz-padding">
-                          By: <%- item.author %>
-                        </p>
-                      <% } %>
-
-                      <% if (item.ethAddress) { %>
-                        <!-- only shows for curated links, not rss feeds -->
-                        <p class="link-domain no-horiz-padding">
-                          <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
-                          <%- domain %>
-                        </p>
-                      <% } %>
-
-                      <% if (item.description) { %>
-                        <p class="description no-horiz-padding">
-                          <span class="date"><%- dateTime %></span>
-                          <%- trimmedDesc %><%- ellipses %>
-                          <a href="<%- item.linkUrl %>">  (full story ↗)</a>
-                        </p>
-                      <% } %>
-
-                      <% if (item.twitterHandle) { %>
-                        <!-- only displayed for curated links, not rss feeds -->
-                        <p class="link-postedby-twitter-handle no-horiz-padding">
-                          Curated by:
-                          <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
-                            @<%- item.twitterHandle %>
-                          </a>
-                          <%- curatedAtDateTime %>
-                        </p>
-                      <% } %>
-
-                    </div>
-
-                </td>
-              </tr>
-
-          <% });  } %>
-
-      </table>
-    </section>
-  </div>
-
-  <div class="column--one-third">
-
-    <% if (window.location.pathname === '/curators-picks') { %>
-      <!-- only shows for curated links, not rss feeds -->
-      <section class="section section--contrast section--no-box-shadow section--max-width-400">
-        <h2 class="section-title">👉 how this works</h2>
-        <p class="messaging margin-top-none">
-          Curious about curation?
-          There's a quick explainer
-          on the <a href="about#curation" class="link no-state">About</a> page.
-        </p>
-      </section>
-    <% } else { %>
-      <section class="section section--contrast section--no-box-shadow section--max-width-400">
-        <h2 class="section-title">
-          <i class="fa fa-fw fa-2x fa-twitter"></i>
-        </h2>
-        <p class="messaging">
-          We're <a href="https://twitter.com/CryptofilterXYZ" class="link no-state">@CryptofilterXYZ</a> on Twitter.
-          You know what to do.
-        </p>
-      </section>
-    <% } %>
-
-  </div>
-
-</div>`;
-
-
-},{}],10:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // Utilities & Helpers
 
 function stripEmojiFromString(str) {
@@ -18795,4 +18494,4 @@ module.exports = {
   formatTimestamp
 }
 
-},{}]},{},[5]);
+},{}]},{},[4]);

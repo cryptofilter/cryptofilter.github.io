@@ -1219,56 +1219,6 @@
 
 
 },{}],2:[function(require,module,exports){
-// Dependencies are bundled via browserify
-// Will not leak into global scope
-const createDOMPurify = require('dompurify');
-
-const _ = require('./../deps/lodash.4.17.15.js');
-const fetch = require('./../fetch.js');
-const headlinesTemplates = require('./../templates/headlines.js');
-const utils = require('./../utils.js');
-
-console.log('--- cryptofilter.xyz ---');
-console.log(`  lodash dep injected:`, _ || 'undefined');
-
-
-// Selectors ---------------
-const selectors = {
-  appContainer: document.getElementById('js-app-container')
-}
-
-// Init DOMPurify ----------
-const domPurify = createDOMPurify(window);
-
-// Template Settings -------
-_.templateSettings.imports.formatTimestamp = utils.formatTimestamp;
-
-
-// Populate ----------------
-
-async function populate() {
-  let _tmplData = { label: 'curator\'s picks', feed: 'loading' };
-  const compiler = _.template(headlinesTemplates);
-  try {
-
-    // Initial render (pre-fetch)
-    selectors.appContainer.innerHTML = domPurify.sanitize(compiler(_tmplData));
-    // Fetch data
-    const data = await fetch.curatedLinks(50);
-    console.log('curatedLinks', data);
-    // Update template w data
-    _tmplData.feed = data;
-    selectors.appContainer.innerHTML = domPurify.sanitize(compiler(_tmplData));
-
-  } catch (e) {
-    _tmplData.feed = 'error';
-    selectors.appContainer.innerHTML = domPurify.sanitize(compiler(_tmplData));
-  }
-};
-
-populate();
-
-},{"./../deps/lodash.4.17.15.js":3,"./../fetch.js":4,"./../templates/headlines.js":5,"./../utils.js":6,"dompurify":1}],3:[function(require,module,exports){
 (function (global){
 // https://raw.githubusercontent.com/lodash/lodash/4.17.15-npm/lodash.js
 
@@ -18386,10 +18336,9 @@ populate();
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports = {
-  rssFeed,
-  curatedLinks
+  rssFeed
 }
 
 async function rssFeed(feedUrl) {
@@ -18411,27 +18360,184 @@ async function rssFeed(feedUrl) {
   });
 }
 
-async function curatedLinks(num) {
-  console.log('--- fetch.curatedLinks()', num);
+},{}],4:[function(require,module,exports){
+// Dependencies are bundled via browserify
+// Will not leak into global scope
+const _ = require('./../deps/lodash.4.17.15.js');
+const utils = require('./../utils.js');
+const router = require('./router.js');
+const selectors = require('./selectors.js');
 
-  return new Promise(async (resolve, reject) => {
-    try {
-      const limit = num || 6;
-      const url = `https://api.microsponsors.io/v1/fetch-curated-links?limit=${limit}`;
-      const response = await fetch(url, {
-        method: 'GET',
-        cache: 'no-cache',
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      resolve(response.json());
-    } catch (err) {
-      reject();
+console.log('--- cryptofilter.xyz ---');
+console.log(`  lodash dep injected:`, _ || 'undefined');
+
+
+// Start the router
+const start = _.once(router.start);
+start();
+
+// Template Settings -------
+_.templateSettings.imports.formatTimestamp = utils.formatTimestamp;
+
+// Attach event listener & handler:
+selectors.headlineBtnEls.forEach((d) => {
+  d.addEventListener('click', (event) => {
+    console.log('clicked', event.target.getAttribute('data-feed-url'));
+    event.preventDefault();
+
+    const label = event.target.getAttribute('data-label');
+    const feedUrl = event.target.getAttribute('data-feed-url');
+    const link = event.target.getAttribute('data-link');
+    const contentType = event.target.getAttribute('data-content-type');
+
+    router.route({ label, link, feedUrl, contentType });
+
+    window.scrollTo(0, 0);
+  });
+
+});
+
+
+},{"./../deps/lodash.4.17.15.js":2,"./../utils.js":8,"./router.js":5,"./selectors.js":6}],5:[function(require,module,exports){
+const createDOMPurify = require('dompurify');
+const _ = require('./../deps/lodash.4.17.15.js');
+const headlinesTemplates = require('./../templates/headlines.js');
+const fetch = require('./fetch.js');
+const selectors = require('./selectors.js');
+
+// Routes: ------------------
+// https://cryptofilter.xyz/#the-defiant-newsletter
+//                          #<label>-<contentType>
+
+module.exports = {
+  start,
+  route,
+  routeToHomepage
+};
+
+// Init DOMPurify ----------
+const domPurify = createDOMPurify(window);
+
+
+// Public fns ---------------
+
+function start() {
+  console.log('--- router.start()');
+
+  // Attach listener to handle back button events, etc
+  window.onpopstate = _handleStateChange;
+
+  // Check if we're in a valid route path for headlines view:
+  const routeData = _getValidRouteData();
+}
+
+
+async function route (newState) {
+  console.log('--- router.route()', newState);
+  console.trace();
+
+  _render(newState, { feed: 'loading' });
+  _route(newState);
+
+  try {
+    const data = await fetch.rssFeed(newState.feedUrl)
+    _render(newState, data);
+
+  } catch (e) {
+    console.error(e.message);
+    _render(newState, { feed: 'error' });
+  }
+}
+
+
+function routeToHomepage () {
+  console.log('--- router.routeToHomepage()');
+  const url = window.location.toString().replace(/#.*/gi, '');
+  window.history.pushState({}, '', url);
+  _handleStateChange();
+}
+
+
+// Private helpers ----------
+
+function _encodeLabel(input) {
+  return encodeURI(input.toLowerCase().replace(/ /g, '-'))
+}
+
+function _decodeLabel(input) {
+  return decodeURI(input.toLowerCase().replace(/-/g, ' '))
+}
+
+function _getValidRouteData() {
+  // Read the hash and render the correct template if it
+  // matches a button label we've cached during init sequence
+  const rawHash = window.location.hash.replace(/#/g, '');
+  const routeDetected = _decodeLabel(rawHash);
+  console.log('  rawHash:', rawHash || '<none>');
+  console.log('  routeDetected:', routeDetected || '<none>');
+  // If hash matches a headlineBtn label, show it
+  selectors.headlineBtnEls.forEach((d) => {
+    const label = d.getAttribute('data-label');
+    const link = d.getAttribute('data-link');
+    const feedUrl = d.getAttribute('data-feed-url');
+    const contentType = d.getAttribute('data-content-type');
+    const btnRoute = `${label.toLowerCase()} ${contentType.toLowerCase()}`;
+    if (routeDetected === btnRoute) {
+      console.log('  route match: ', routeDetected);
+      route({ label, link, feedUrl, contentType });
     }
   });
 }
 
-},{}],5:[function(require,module,exports){
+function _route(newState) {
+  console.log('_route()', newState);
+  const state = newState;
+  const title = newState.label;
+  const loc = window.location.toString().replace(/#.*/gi, '');
+  const url = loc + `#${_encodeLabel(newState.label)}-${newState.contentType}`;
+  console.log('--- router._route()');
+  console.log('  state:', state);
+  console.log('  title:', title);
+  console.log('  url:', url);
+  window.history.pushState(state, title, url);
+}
+
+function _render(newState, data) {
+  // Compile templates & inject into dom
+  const compiler = _.template(headlinesTemplates);
+  const _data = Object.assign({}, newState, data);
+  // Hide homepage view
+  selectors.appHomeEl.classList.add('dnone');
+  // Insert *sanitized* compiled view
+  console.log('data', data);
+  selectors.appRoutesEl.innerHTML = domPurify.sanitize(compiler(_data));
+}
+
+function _handleStateChange(event) {
+  console.log(`--- router._handleStateChange()`, event);
+  // Check if we're in a valid route path for headlines view:
+  const routeData = _getValidRouteData();
+  console.log('  routeData:', routeData || '<none>');
+  if (routeData) {
+    route(_routeData);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 700);
+  // Otherwise re-route back home
+  } else {
+    selectors.appRoutesEl.textContent = '';
+    selectors.appHomeEl.classList.remove('dnone');
+  }
+}
+
+},{"./../deps/lodash.4.17.15.js":2,"./../templates/headlines.js":7,"./fetch.js":3,"./selectors.js":6,"dompurify":1}],6:[function(require,module,exports){
+module.exports = {
+  appHomeEl: document.getElementById('js-app-home'),
+  appRoutesEl: document.getElementById('js-app-routes'),
+  headlineBtnEls: document.querySelectorAll('.js-btn-headlines')
+}
+
+},{}],7:[function(require,module,exports){
 module.exports = `<div class="app-view column-container column-container--two-one">
 
   <div class="column--two-thirds">
@@ -18550,7 +18656,7 @@ module.exports = `<div class="app-view column-container column-container--two-on
 </div>`;
 
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Utilities & Helpers
 
 function stripEmojiFromString(str) {
@@ -18572,4 +18678,4 @@ module.exports = {
   formatTimestamp
 }
 
-},{}]},{},[2]);
+},{}]},{},[4]);

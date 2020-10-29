@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <title>Cryptofilter.XYZ - Leaderboard</title>
+    <title>Cryptofilter.xyz - Leaderboard</title>
     <meta name="description" content="Your dashboard for hi-signal crypto / defi / web3 news + info.">
 
     <!-- Main stylesheet -->
@@ -68,13 +68,13 @@
 
     <div class="topnav">
       <div class="topnav-inner">
-          <a href="curators-picks" class="no-state">Curator's Picks</a>
-          <a href="contribute" class="no-state">+ Add a Link</a>
-          <a href="leaderboard" class="no-state">Leaderboard</a>
-          <a href="about" class="no-state">About</a>
-          <a href="https://twitter.com/CryptofilterXYZ" target="_blank">
-            <i class="fa fa-fw fa-2x fa-twitter"></i>
-          </a>
+        <a href="news-feeds" class="no-state">News Feeds</a>
+        <a href="contribute" class="no-state">+ Add a Link</a>
+        <a href="leaderboard" class="no-state">Leaderboard</a>
+        <a href="about" class="no-state">About</a>
+        <a href="https://twitter.com/CryptofilterXYZ" target="_blank">
+          <i class="fa fa-fw fa-2x fa-twitter"></i>
+        </a>
       </div>
     </div>
     
@@ -87,7 +87,7 @@
     <div class="overlay collapsed" id="js-burger-overlay">
       <a href="javascript:void(0);" class="close-overlay" id="js-burger-close-overlay"></a>
       <a href="/" class="link no-state">Home</a>
-      <a href="curators-picks" class="link no-state">Curator's Picks</a>
+      <a href="news-feeds" class="link no-state">News Feeds</a>
       <a href="contribute" class="link no-state">+ Add a Link</a>
       <a href="leaderboard" class="link no-state">Leaderboard</a>
       <a href="about" class="link no-state">About</a>
@@ -97,37 +97,51 @@
     </div>
 
     <div class="app-container">
-      <div class="column-container column-container--two-one">
+      <div class="column-container column-container--halves">
 
-        <div class="column--two-thirds">
+        <div class="column--one-half">
+
           <section class="section section--no-border-box">
             <h2 class="section-title section-title--border-bottom">
-              leaderboard
+              author leaderboard
             </h2>
-            <p class="messaging">
-              Each curator is awarded <span class="bold">100 points</span> for applying and being accepted as a curator. Each link they submit is worth <span class="bold">5 points</span>. You capply to be a curator below.
+            <p class="messaging min-height-120">
+              Each author is awarded <span class="bold">1 point</span> when a curator submits a news link they created.
+              <br /><br />
+              <a href="#curator-leaderboard" class="link no-state">↧ Click here</a> to jump down to the curator leaderboard.
             </p>
-            <div id="js-leaderboard">
+            <div id="js-author-leaderboard">
               <!-- table gets inserted here -->
+              <div class="spinner">
+                <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+              </div>
             </div>
           </section>
-          <section class="section section--contrast section--no-box-shadow section--max-width-400">
-          
-            <a name="apply"></a>
-            <h2 class="section-title">💡 want to curate?</h2>
-          
-            <p class="messaging margin-top-none">
-              Want to help curate the news here?
-              Fill out the form below, it only takes a few minutes:
-            </p>
-          
-            <a class="typeform-share button" href="https://form.typeform.com/to/xyrKi4j0" data-mode="drawer_right" style="display:inline-block;text-decoration:none;background-color:#000000;color:white;cursor:pointer;font-family:Arial,sans-serif;font-size:16px;line-height:50px;text-align:center;margin:0;height:50px;padding:0px 33px;border-radius:3px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;" target="_blank">Apply now </a> <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){ js=ce.call(d,"script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
-          
-          </section>
+
         </div>
 
-        <div class="column--one-third">
-          &nbsp;
+        <div class="column--one-half">
+          <a name="curator-leaderboard" class="anchor-tag"></a>
+          <section class="section section--no-border-box">
+            <h2 class="section-title section-title--border-bottom">
+              curator leaderboard
+            </h2>
+            <div class="messaging min-height-120">
+              Each curator is awarded:
+              <ul class="bullet-list">
+                <li><span class="bold">100 points</span> for applying and being accepted as a curator</li>
+                <li><span class="bold">5 points</span> for each news link they submit on the <a href="contribute.html" class="link no-state">"Add Link"</a> form</li>
+              </ul>
+              You can apply to be a curator, <a href="contribute#apply" class="link no-state">click here</a>.
+            </div>
+            <div id="js-curator-leaderboard">
+              <!-- table gets inserted here -->
+              <div class="spinner">
+                <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+              </div>
+            </div>
+          </section>
+
         </div>
 
       </div>
@@ -141,7 +155,7 @@
           <a href="/">
             <img src="img/diamond.svg" width="75" alt="cryptofilter logo tile"/>
           </a>
-          <a href="curators-picks" class="no-state">Curator's Picks</a>
+          <a href="news-feeds" class="link no-state">News Feeds</a>
           <a href="contribute" class="no-state">+ Add a Link</a>
           <a href="leaderboard" class="no-state">Leaderboard</a>
           <a href="about" class="no-state">About</a>

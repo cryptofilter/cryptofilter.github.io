@@ -99,6 +99,10 @@ textarea, input, fieldset {
   .link.no-state:visited {
     color: #1d90ee; }
 
+.subtitle {
+  color: #4e5c69;
+  font-family: Helvetica, Arial, sans-serif; }
+
 /* Logo -------------------------------------- */
 .logo-container {
   background: #fff; }
@@ -196,9 +200,6 @@ input.readonly {
     .section .section-title.section-title--border-bottom {
       border-top: 2px solid #4e5c69;
       border-bottom: 2px solid #4e5c69; }
-    .section .section-title .subtitle {
-      color: #4e5c69;
-      font-family: Helvetica, Arial, sans-serif; }
     .section .section-title .fa-youtube-play {
       color: #ff0033; }
     .section .section-title .fa-percent {
@@ -290,7 +291,8 @@ input.readonly {
 /* Leaderboard ------------------------------ */
 .leaderboard-table {
   font-family: Courier, monospace;
-  border: 2px solid #4e5c69; }
+  border: 2px solid #4e5c69;
+  background-color: #fbfbfb; }
   .leaderboard-table th {
     color: #aaa;
     border-bottom: 2px solid #aaa;
