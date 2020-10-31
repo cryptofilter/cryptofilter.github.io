@@ -94,6 +94,8 @@ textarea, input, fieldset {
   background: transparent; }
   .link:hover, .link:active {
     color: #82c8f9; }
+    .link:hover.no-state:visited, .link:active.no-state:visited {
+      color: #82c8f9; }
   .link:visited {
     color: #a351e0; }
   .link.no-state:visited {
@@ -224,6 +226,8 @@ input.readonly {
       background: transparent; }
       .list-table .link-column .link:hover, .list-table .link-column .link:active {
         color: #82c8f9; }
+        .list-table .link-column .link:hover.no-state:visited, .list-table .link-column .link:active.no-state:visited {
+          color: #82c8f9; }
       .list-table .link-column .link:visited {
         color: #a351e0; }
       .list-table .link-column .link.no-state:visited {
@@ -260,6 +264,8 @@ input.readonly {
       color: #1d90ee; }
       .list-table.list-table--links-list .link-column .description a:hover, .list-table.list-table--links-list .link-column .description a:active {
         color: #82c8f9; }
+        .list-table.list-table--links-list .link-column .description a:hover.no-state:visited, .list-table.list-table--links-list .link-column .description a:active.no-state:visited {
+          color: #82c8f9; }
       .list-table.list-table--links-list .link-column .description a:visited {
         color: #a351e0; }
       .list-table.list-table--links-list .link-column .description a.no-state:visited {
@@ -273,6 +279,8 @@ input.readonly {
     color: #1d90ee; }
     .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:hover, .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:active {
       color: #82c8f9; }
+      .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:hover.no-state:visited, .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:active.no-state:visited {
+        color: #82c8f9; }
     .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a:visited {
       color: #a351e0; }
     .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a.no-state:visited {
@@ -321,6 +329,8 @@ body.static-page {
       font-family: Courier, monospace; }
       .static-content p a:hover, .static-content p a:active {
         color: #82c8f9; }
+        .static-content p a:hover.no-state:visited, .static-content p a:active.no-state:visited {
+          color: #82c8f9; }
       .static-content p a:visited {
         color: #a351e0; }
       .static-content p a.no-state:visited {
@@ -335,6 +345,8 @@ body.static-page {
   color: #000; }
   .footer-nav .footer-nav-inner a:hover, .footer-nav .footer-nav-inner a:active {
     color: #82c8f9; }
+    .footer-nav .footer-nav-inner a:hover.no-state:visited, .footer-nav .footer-nav-inner a:active.no-state:visited {
+      color: #82c8f9; }
   .footer-nav .footer-nav-inner a:visited {
     color: #a351e0; }
   .footer-nav .footer-nav-inner a.no-state:visited {
@@ -360,6 +372,8 @@ body.static-page {
   color: #1d90ee; }
   .not-found a:hover, .not-found a:active {
     color: #82c8f9; }
+    .not-found a:hover.no-state:visited, .not-found a:active.no-state:visited {
+      color: #82c8f9; }
   .not-found a:visited {
     color: #a351e0; }
   .not-found a.no-state:visited {
