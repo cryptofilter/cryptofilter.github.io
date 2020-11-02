@@ -18402,7 +18402,7 @@ module.exports = `<table class="leaderboard-table">
 
   <tr>
     <th class="points">Points</th>
-    <th><%- role %> / Twitter Handle</th>
+    <th><%- role %></th>
   </tr>
 
   <% leaderboard.forEach((item, i) => { %>

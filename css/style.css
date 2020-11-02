@@ -3296,6 +3296,12 @@ ul.bullet-list {
   ul.bullet-list li {
     list-style-type: disc; }
 
+.show-mobile-only {
+  display: none; }
+  @media (max-width: 1024px) {
+    .show-mobile-only {
+      display: block; } }
+
 /* Logo -------------------------------------- */
 .logo-container {
   z-index: 50;
@@ -3599,10 +3605,10 @@ ul.bullet-list {
     max-width: 600px; }
     .section .messaging.margin-top-none {
       margin-top: 0; }
-    .section .messaging.min-height-120 {
-      min-height: 120px; }
+    .section .messaging.min-height-130 {
+      min-height: 130px; }
       @media (max-width: 1024px) {
-        .section .messaging.min-height-120 {
+        .section .messaging.min-height-130 {
           min-height: auto; } }
     .section .messaging .ital {
       font-style: italic; }

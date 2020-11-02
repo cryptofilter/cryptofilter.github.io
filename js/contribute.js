@@ -1255,7 +1255,7 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
           selectors.addLinkTitleInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(title));
           showAddLinkFormError('');
         }
-        const author = getAuthorFromJsonLd(metadata) || metadata['twitter:creator'] || metadata['author'] || metadata['article:author'] || metadata['og:article:author'];
+        const author = getAuthorFromJsonLd(metadata) || metadata['author'] || metadata['twitter:creator'] || metadata['article:author'] || metadata['og:article:author'];
         console.log('author:', author);
         if (author) {
           selectors.addLinkAuthorInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(author));
