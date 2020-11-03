@@ -1249,7 +1249,7 @@ selectors.addLinkUrlInputEl.addEventListener('keyup', (event) => {
       (metadata) => {
         console.log(metadata);
         clearAddLinkFormMetadataFields();
-        const title = metadata['twitter:title'] || metadata['title'] || metadata['og:title'] || title;
+        const title =  metadata['title'] || metadata['twitter:title'] || metadata['og:title'];
         console.log('title:', title);
         if (title) {
           selectors.addLinkTitleInputEl.value = domPurify.sanitize(utils.stripEmojiFromString(title));
