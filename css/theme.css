@@ -340,17 +340,7 @@ body.static-page {
 
 /* Footer Nav -------------------------------- */
 .footer-nav .footer-nav-inner a {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #1d90ee;
   color: #000; }
-  .footer-nav .footer-nav-inner a:hover, .footer-nav .footer-nav-inner a:active {
-    color: #82c8f9; }
-    .footer-nav .footer-nav-inner a:hover.no-state:visited, .footer-nav .footer-nav-inner a:active.no-state:visited {
-      color: #82c8f9; }
-  .footer-nav .footer-nav-inner a:visited {
-    color: #a351e0; }
-  .footer-nav .footer-nav-inner a.no-state:visited {
-    color: #1d90ee; }
   .footer-nav .footer-nav-inner a:hover, .footer-nav .footer-nav-inner a:visited {
     color: #000; }
   .footer-nav .footer-nav-inner a.no-state:visited {
