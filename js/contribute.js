@@ -1219,6 +1219,124 @@
 
 
 },{}],2:[function(require,module,exports){
+module.exports = {
+  linkMetadata,
+  addLinkFormPost,
+  tweetCuratedLink
+}
+
+async function linkMetadata(url) {
+  console.log('--- fetch.linkMetadata()', url);
+
+  return new Promise(async (resolve, reject) => {
+    if (!url.match(/^(https?):\/\/[^\s$.?#].[^\s]*$/)) {
+      return reject(new Error('Please enter a valid url'));
+    }
+    try {
+      const queryUrl = 'https://api.microsponsors.io/v1/fetch-link-metadata?url=' + url;
+      const response = await fetch(queryUrl, {
+        method: 'GET',
+        cache: 'no-cache',
+        mode: 'cors',
+        credentials: 'omit'
+      });
+      const responseJson = await response.json();
+
+      if (response.status !== 200 || responseJson.errorMessage) {
+        return reject(new Error(`Link could not be found.`));
+      } else {
+        resolve(responseJson.metadata);
+      }
+    } catch (err) {
+      console.error(err.message);
+      return reject(new Error(`Link could not be found.`));
+    }
+  });
+}
+
+async function addLinkFormPost(signedData, account, signature) {
+  console.log('--- fetch.postAddLinkForm()');
+
+  return new Promise(async (resolve, reject) => {
+
+    const queryUrl = 'https://api.microsponsors.io/v1/add-link';
+    const postData = {
+      linkUrl: signedData.linkUrl,
+      title: signedData.title,
+      author: signedData.author,
+      image: signedData.image,
+      timestamp: signedData.timestamp,
+      ethAddress: account,
+      signature: signature
+    }
+
+    try {
+      const response = await fetch(queryUrl, {
+        method: 'POST',
+        cache: 'no-cache',
+        mode: 'cors',
+        credentials: 'omit',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(postData)
+      });
+      const responseJson = await response.json();
+
+      if (response.status !== 200 || responseJson.errorMessage) {
+        return reject(new Error(`Link could not be not added. Error: ${responseJson.errorMessage}`));
+      } else {
+        resolve(responseJson);
+      }
+    } catch(err) {
+      reject(new Error(`Link could not be not added. Error: ${err.message}`));
+    }
+
+  });
+}
+
+async function tweetCuratedLink(signedData, account, signature) {
+  console.log('--- fetch.tweetCuratedLink()');
+
+  const queryUrl = 'https://api.microsponsors.io/v1/tweet-curated-link';
+  const postData = {
+    linkUrl: signedData.linkUrl,
+    title: signedData.title,
+    author: signedData.author,
+    image: signedData.image,
+    timestamp: signedData.timestamp,
+    ethAddress: account,
+    signature: signature
+  }
+  console.log('postData', postData);
+
+  try {
+    const response = await fetch(queryUrl, {
+      method: 'POST',
+      cache: 'no-cache',
+      mode: 'cors',
+      credentials: 'omit',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: JSON.stringify(postData)
+    });
+    const responseJson = await response.json();
+
+    if (response.status !== 200 || responseJson.errorMessage) {
+      console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
+      console.log(responseJson);
+    } else {
+      console.log('Twitter API: Success');
+    }
+  } catch(err) {
+    console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
+    console.log(responseJson);
+  }
+
+}
+
+},{}],3:[function(require,module,exports){
 // Dependencies are bundled via browserify
 // Will not leak into global scope
 const createDOMPurify = require('dompurify');
@@ -1484,125 +1602,7 @@ function getAuthorFromJsonLd(metadata) {
   return author;
 }
 
-},{"./../deps/lodash.4.17.15.js":5,"./../utils.js":6,"./fetch.js":3,"./selectors.js":4,"dompurify":1}],3:[function(require,module,exports){
-module.exports = {
-  linkMetadata,
-  addLinkFormPost,
-  tweetCuratedLink
-}
-
-async function linkMetadata(url) {
-  console.log('--- fetch.linkMetadata()', url);
-
-  return new Promise(async (resolve, reject) => {
-    if (!url.match(/^(https?):\/\/[^\s$.?#].[^\s]*$/)) {
-      return reject(new Error('Please enter a valid url'));
-    }
-    try {
-      const queryUrl = 'https://api.microsponsors.io/v1/fetch-link-metadata?url=' + url;
-      const response = await fetch(queryUrl, {
-        method: 'GET',
-        cache: 'no-cache',
-        mode: 'cors',
-        credentials: 'omit'
-      });
-      const responseJson = await response.json();
-
-      if (response.status !== 200 || responseJson.errorMessage) {
-        return reject(new Error(`Link could not be found.`));
-      } else {
-        resolve(responseJson.metadata);
-      }
-    } catch (err) {
-      console.error(err.message);
-      return reject(new Error(`Link could not be found.`));
-    }
-  });
-}
-
-async function addLinkFormPost(signedData, account, signature) {
-  console.log('--- fetch.postAddLinkForm()');
-
-  return new Promise(async (resolve, reject) => {
-
-    const queryUrl = 'https://api.microsponsors.io/v1/add-link';
-    const postData = {
-      linkUrl: signedData.linkUrl,
-      title: signedData.title,
-      author: signedData.author,
-      image: signedData.image,
-      timestamp: signedData.timestamp,
-      ethAddress: account,
-      signature: signature
-    }
-
-    try {
-      const response = await fetch(queryUrl, {
-        method: 'POST',
-        cache: 'no-cache',
-        mode: 'cors',
-        credentials: 'omit',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: JSON.stringify(postData)
-      });
-      const responseJson = await response.json();
-
-      if (response.status !== 200 || responseJson.errorMessage) {
-        return reject(new Error(`Link could not be not added. Error: ${responseJson.errorMessage}`));
-      } else {
-        resolve(responseJson);
-      }
-    } catch(err) {
-      reject(new Error(`Link could not be not added. Error: ${err.message}`));
-    }
-
-  });
-}
-
-async function tweetCuratedLink(signedData, account, signature) {
-  console.log('--- fetch.tweetCuratedLink()');
-
-  const queryUrl = 'https://api.microsponsors.io/v1/tweet-curated-link';
-  const postData = {
-    linkUrl: signedData.linkUrl,
-    title: signedData.title,
-    author: signedData.author,
-    image: signedData.image,
-    timestamp: signedData.timestamp,
-    ethAddress: account,
-    signature: signature
-  }
-  console.log('postData', postData);
-
-  try {
-    const response = await fetch(queryUrl, {
-      method: 'POST',
-      cache: 'no-cache',
-      mode: 'cors',
-      credentials: 'omit',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: JSON.stringify(postData)
-    });
-    const responseJson = await response.json();
-
-    if (response.status !== 200 || responseJson.errorMessage) {
-      console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
-      console.log(responseJson);
-    } else {
-      console.log('Twitter API: Success');
-    }
-  } catch(err) {
-    console.error(`Could not post to Twitter API. Error: ${responseJson.errorMessage}`);
-    console.log(responseJson);
-  }
-
-}
-
-},{}],4:[function(require,module,exports){
+},{"./../deps/lodash.4.17.15.js":5,"./../utils.js":6,"./fetch.js":2,"./selectors.js":4,"dompurify":1}],4:[function(require,module,exports){
 module.exports = {
   // Add link <form>
   addLinkFormEl: document.getElementById('js-form-add-link'),
@@ -18757,4 +18757,4 @@ module.exports = {
   formatTimestamp
 }
 
-},{}]},{},[2]);
+},{}]},{},[3]);

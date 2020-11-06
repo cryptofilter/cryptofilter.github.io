@@ -18407,12 +18407,8 @@ console.log(`  lodash dep injected:`, _ || 'undefined');
 curatorsPicksSection.populate();
 
 },{"./curators-picks-section.js":2,"./deps/lodash.4.17.15.js":3}],5:[function(require,module,exports){
-module.exports = `<section class="section section--no-border-box">
+module.exports = `<section class="section section--no-padding section--no-border-box">
 <table class="list-table list-table--links-list list-table--featured">
-
-  <tr>
-    <th class="subtitle"><span>🕑</span>latest headlines:</th>
-  </tr>
 
   <%  items.forEach((item, i) => { %>
 

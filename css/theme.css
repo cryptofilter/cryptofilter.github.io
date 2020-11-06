@@ -104,6 +104,8 @@ textarea, input, fieldset {
 .subtitle {
   color: #4e5c69;
   font-family: Helvetica, Arial, sans-serif; }
+  .subtitle.is-dark-bg {
+    color: #aaa; }
 
 /* Logo -------------------------------------- */
 .logo-container {
@@ -185,11 +187,13 @@ input.readonly {
 .section {
   box-shadow: 1px 1px 3px #bbb;
   background: #FFF; }
+  .section.section--no-border-box {
+    box-shadow: none; }
   .section.section--contrast {
     background: #fbfbfb;
     border: none;
     box-shadow: 5px 5px 7px #d5d5d5; }
-  .section.section--no-border-box {
+  .section.section--no-padding {
     box-shadow: none;
     border: none; }
   .section .section-title {
@@ -200,8 +204,10 @@ input.readonly {
       .section .section-title {
         font-weight: 700; } }
     .section .section-title.section-title--border-bottom {
-      border-top: 2px solid #4e5c69;
       border-bottom: 2px solid #4e5c69; }
+    @media (max-width: 768px) {
+      .section .section-title.has-mobile-superheader {
+        background-color: #fbfbfb; } }
     .section .section-title .fa-youtube-play {
       color: #ff0033; }
     .section .section-title .fa-percent {
@@ -244,6 +250,11 @@ input.readonly {
       color: #ddd; }
       .list-table .link-column .btn-headlines:hover {
         color: #fff; }
+    .list-table .link-column .btn-voting {
+      color: #FFF;
+      background-color: #3EA99E; }
+      .list-table .link-column .btn-voting:hover {
+        color: #FFF; }
 
 .list-table.list-table--theme-inverse .link-column {
   border-bottom: 1px solid #4e5c69; }
@@ -285,6 +296,10 @@ input.readonly {
       color: #a351e0; }
     .list-table.list-table--links-list .link-column .link-postedby-twitter-handle a.no-state:visited {
       color: #1d90ee; }
+
+@media (max-width: 1024px) {
+  .list-table.list-table--featured {
+    border-bottom: 1px solid #4e5c69; } }
 
 .list-table.list-table--featured tr .link-column {
   border-bottom: none;

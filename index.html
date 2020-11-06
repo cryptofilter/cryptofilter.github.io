@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Cryptofilter.xyz - hi-signal crypto / defi / web3 news + info</title>
-    <meta name="description" content="Curated news aggregator and RSS feed reader for the world of cryptocurrency, decentralized finance, blockchain  and Web 3.0 user-owned networks">
+    <meta name="description" content="Curated news and information on cryptocurrency, decentralized finance (DeFi), non-fungible tokens (NFTs), blockchain and Web 3.0 user-owned networks.">
 
     <!-- Main stylesheet -->
     <link href='css/style.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -57,25 +57,25 @@
 
   </head>
 
-  <body>
+  <body id="homepage">
 
     <div class="logo-container">
-      <img src="img/diamond.svg" class="logo-image loading" id="js-logo-image" />
-      <h1 class="logo">
+      <img src="img/diamond.svg" class="logo-image loading" id="js-logo-image" alt="cryptofilter logo" />
+      <div class="logo">
         <a href="/" target="_self">
           Cryptofilter
         </a>
         <span class="tagline">
           hi-signal crypto / defi / web3 news + info
         </span>
-      </h1>
+      </div>
     </div>
 
     <div class="topnav">
       <div class="topnav-inner">
         <a href="news-feeds" class="no-state">News Feeds</a>
-        <a href="contribute" class="no-state">+ Add a Link</a>
         <a href="leaderboard" class="no-state">Leaderboard</a>
+        <a href="contribute" class="no-state">+ Add a News Link</a>
         <a href="about" class="no-state">About</a>
         <a href="https://twitter.com/CryptofilterXYZ" target="_blank">
           <i class="fa fa-fw fa-2x fa-twitter"></i>
@@ -93,17 +93,25 @@
       <a href="javascript:void(0);" class="close-overlay" id="js-burger-close-overlay"></a>
       <a href="/" class="link no-state">Home</a>
       <a href="news-feeds" class="link no-state">News Feeds</a>
-      <a href="contribute" class="link no-state">+ Add a Link</a>
       <a href="leaderboard" class="link no-state">Leaderboard</a>
+      <a href="contribute" class="link no-state">+ Add a News Link</a>
       <a href="about" class="link no-state">About</a>
+      <a href="privacy" class="link no-state">Privacy</a>
+      <a href="terms" class="link no-state">Terms</a>
       <a href="https://twitter.com/CryptofilterXYZ" target="_blank" class="link no-state">
         <i class="fa fa-fw fa-2x fa-twitter"></i>
       </a>
     </div>
 
-    <div id="js-app-home" class="app-container column-container column-container--full no-flex center">
+    <div id="js-app-home" class="app-container column-container column-container--two-one">
     
-        <div class="column--three-fourths">
+        <div class="column--two-thirds">
+    
+          <h1 class="subtitle">
+            <span class="has-margin-right">🕑</span>
+            latest news headlines:
+          </h1>
+    
           <div id="js-curators-picks-section">
             <!-- dynamic view added via js app attached here -->
             <div class="spinner">
@@ -111,6 +119,36 @@
             </div>
           </div>
         </div> <!-- /.column two-thirds -->
+    
+    
+        <div class="column--one-third">
+          <section class="section section--no-border-box section--no-padding">
+            <h2 class="section-title">
+              <span class="icon">ℹ️</span>
+              Info pages:
+            </h2>
+            <table class="list-table list-table--theme-inverse">
+          
+              <tr>
+                <td class="link-column">
+                  <a href="governance-tokens-voting-discussion-forums" class="link no-state">
+                    Governance Tokens
+                  </a>
+                </td>
+              </tr>
+          
+              <tr>
+                <td class="link-column">
+                  <a href="nfts-non-fungible-tokens" class="link no-state">
+                    NFTs
+                  </a>
+                </td>
+              </tr>
+          
+            </table>
+          </section>
+        </div>
+    
     
     </div> <!-- /.column-container -->
 
@@ -123,8 +161,8 @@
             <img src="img/diamond.svg" width="75" alt="cryptofilter logo tile"/>
           </a>
           <a href="news-feeds" class="no-state">News Feeds</a>
-          <a href="contribute" class="no-state">+ Add a Link</a>
           <a href="leaderboard" class="no-state">Leaderboard</a>
+          <a href="contribute" class="no-state">+ Add a News Link</a>
           <a href="about" class="no-state">About</a>
           <a href="privacy" class="no-state">Privacy</a>
           <a href="terms" class="no-state">Terms</a>

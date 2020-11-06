@@ -18407,20 +18407,19 @@ module.exports = `<table class="leaderboard-table">
 
   <% leaderboard.forEach((item, i) => { %>
 
+    <% if (item.totalPoints > 1) { %>
     <tr index="<%- i %>">
       <td class="points"><%- item.totalPoints %></td>
       <td class="curator">
-
         <%- item.nickname %>
-
         <% if (item.twitterHandle) { %>
           <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
             @<%- item.twitterHandle %>
           </a>
         <% } %>
-
       </td>
     </tr>
+    <% } %>
 
   <% }); %>
 

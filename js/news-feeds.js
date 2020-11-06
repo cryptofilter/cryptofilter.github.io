@@ -18541,11 +18541,11 @@ module.exports = {
 module.exports = `<div class="app-view column-container column-container--two-one">
 
   <div class="column--two-thirds">
-    <section class="section section--no-border-box">
-      <h2 class="section-title section-title--border-bottom">
+    <section class="section section--no-padding section--no-border-box">
+      <h1 class="section-title section-title--border-bottom">
         <%= label %>
-        <span class="subtitle">latest headlines</a>
-      </h2>
+        <span class="subtitle">latest news</a>
+      </h1>
       <table class="list-table list-table--no-theme list-table--links-list">
 
         <% if (feed === 'loading') { %>
