@@ -3710,7 +3710,8 @@ ul.bullet-list {
       font-size: 13px;
       line-height: 18px;
       overflow: hidden;
-      padding-top: 7.5px; }
+      padding-top: 7.5px;
+      word-break: break-word; }
       .list-table.list-table--links-list tr .link-column .content p.description.no-horiz-padding {
         padding-left: 7.5px;
         padding-right: 0; }

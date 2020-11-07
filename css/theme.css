@@ -214,6 +214,10 @@ input.readonly {
       color: #ff0099; }
     .section .section-title .fa-list {
       color: #6600e6; }
+    .section .section-title .fa-info-circle {
+      color: #aaa; }
+    .section .section-title .fa-plus-circle {
+      color: #3EA99E; }
   .section .see-all-curated {
     border-top: 1px solid #4e5c69; }
     .section .see-all-curated .btn-see-all-curated .fa {
