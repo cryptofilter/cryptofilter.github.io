@@ -3537,6 +3537,7 @@ ul.bullet-list {
       padding-right: 0; }
     .column-container.column-container--two-one .column--one-third {
       min-width: 0;
+      padding-top: 30px;
       padding-left: 0;
       padding-right: 0; }
     .column-container.column-container--halves .column--one-half {
@@ -3546,6 +3547,7 @@ ul.bullet-list {
       .column-container.column-container--halves .column--one-half:first-child {
         padding-right: 0; }
       .column-container.column-container--halves .column--one-half:last-child {
+        padding-top: 30px;
         padding-left: 0; } }
 
 /* Sections ------------------------------------ */
