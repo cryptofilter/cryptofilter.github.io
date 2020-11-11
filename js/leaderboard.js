@@ -18414,7 +18414,7 @@ module.exports = `<table class="leaderboard-table">
         <%- item.nickname %>
         <% if (item.twitterHandle) { %>
           <a href="https://twitter.com/<%- item.twitterHandle %>" class="link no-state">
-            @<%- item.twitterHandle %>
+            <%- item.twitterHandle %>
           </a>
         <% } %>
       </td>

@@ -18610,7 +18610,7 @@ module.exports = `<div class="app-view column-container column-container--two-on
                         <p class="link-postedby-twitter-handle no-horiz-padding">
                           Curated by:
                           <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
-                            @<%- item.twitterHandle %>
+                            <%- item.twitterHandle %>
                           </a>
                           <%- curatedAtDateTime %>
                         </p>
