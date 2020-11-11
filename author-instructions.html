@@ -120,7 +120,10 @@
               To do this, we automatically pull the <a href="https://www.w3schools.com/tags/att_meta_name.asp" class="link no-state">'author' metatag</a> from the link submitted. If no 'author' meta tag is found then we look for the 'twitter:creator' meta tag, and if that isn't found we'll look for the 'article:author' meta tag and then finally the 'og:article:author' meta tag.
             </p>
 
-            <p class="messaging">There are also some publications and CMS's that make use of the <a href="https://json-ld.org/" class="link no-state">'json-ld' standard</a>. For those publications there are special rules in our code for handling them.</p>
+            <p class="messaging">If you'd like to test and see how your article is attributed, you can copy/paste its url into the "<a href="contribute" class="link no-state">Add Link</a>" form. The form will auto-detect and display the "author" attribution per the rules above.
+            </p>
+
+            <p class="messaging">There are some publications and CMS's that make use of the <a href="https://json-ld.org/" class="link no-state">'json-ld' standard</a>. For those publications there are special rules in our code for handling them.</p>
 
             <p class="messaging">
               If you have any questions or requests around author attribution in the Leaderboard feel free to DM via Twitter (<a href="https://twitter.com/CryptofilterXYZ" class="link no-state">@CryptofilterXYZ</a>) or email hello [at] cryptofilter.xyz
@@ -194,6 +197,18 @@
     })();
   </script>
   <!-- End Matomo Code -->
+  
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCZQ36R4KV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-YCZQ36R4KV');
+  </script>
+  <!-- End Google Analytics -->
 
   <script>
     setTimeout(() => {

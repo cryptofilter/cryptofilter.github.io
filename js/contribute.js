@@ -1586,17 +1586,17 @@ function getAuthorFromJsonLd(metadata) {
         author = metadata.jsonld.author.join(' ');
       }
     }
+    // TheBlock.com, ModernConsensus.com format:
+    if (!author && metadata.jsonld['@graph'] && _.isArray(metadata.jsonld['@graph'])) {
+      metadata.jsonld['@graph'].forEach((item) => {
+        if (item['@type'] && item['@type'] === 'Person') {
+          author = item.name;
+        }
+      });
+    }
     // Cointelegraph format:
-    if (metadata.jsonld['author'] && metadata.jsonld['author'].name) {
+    if (!author && metadata.jsonld['author'] && metadata.jsonld['author'].name) {
       author = metadata.jsonld['author'].name;
-    }
-    // ModernConsensus format:
-    if (metadata.jsonld['@graph'] && metadata.jsonld['@graph'] && metadata.jsonld['@graph'][3] && metadata.jsonld['@graph'][3].name) {
-      author = metadata.jsonld['@graph'][3].name;
-    }
-    // The Block format:
-    if (metadata.jsonld['@graph'] && metadata.jsonld['@graph'] && metadata.jsonld['@graph'][5] && metadata.jsonld['@graph'][5].name) {
-      author = metadata.jsonld['@graph'][5].name;
     }
   }
   return author;
