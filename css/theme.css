@@ -107,6 +107,9 @@ textarea, input, fieldset {
   .subtitle.is-dark-bg {
     color: #aaa; }
 
+.last-updated {
+  color: #4e5c69; }
+
 /* Logo -------------------------------------- */
 .logo-container {
   background: #fff; }

@@ -3298,6 +3298,13 @@ ul.bullet-list {
   ul.bullet-list li {
     list-style-type: disc; }
 
+.last-updated {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 12px; }
+  .last-updated time {
+    font-weight: bold; }
+
 .show-mobile-only {
   display: none; }
   @media (max-width: 1024px) {
