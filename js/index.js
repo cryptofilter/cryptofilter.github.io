@@ -18415,12 +18415,15 @@ module.exports = `<section class="section section--no-padding section--no-border
        <% if (i % 2 === 0) { %>
          <tr index="<%- i %>">
        <% } %>
+
           <td class="link-column">
+
               <% if (item.image) { %>
                 <a href="<%- item.linkUrl %>" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'Outbound Image Link Click', '<%- item.linkUrl %>']);">
                   <img src="<%- item.image %>" />
                 </a>
               <% } %>
+
               <div class="content">
                 <a href="<%- item.linkUrl %>" class="link headline no-horiz-padding" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'Outbound Link Click', '<%- item.linkUrl %>']);">
                   <%- item.title %>
@@ -18448,6 +18451,7 @@ module.exports = `<section class="section section--no-padding section--no-border
 
               </div>
           </td>
+
        <% if (i % 2 === 1) { %>
         <tr>
        <% } %>

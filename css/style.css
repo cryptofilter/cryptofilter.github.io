@@ -3524,6 +3524,8 @@ ul.bullet-list {
       flex: 0 1 auto;
       padding-left: 45px;
       min-width: 345px; }
+      .column-container.column-container--two-one .column--one-third.padding-top {
+        padding-top: 30px; }
   .column-container.column-container--halves {
     margin: 0 30px; }
     .column-container.column-container--halves .column--one-half {
@@ -3770,9 +3772,6 @@ ul.bullet-list {
         margin-right: 7.5px; }
 
 /* Homepage --------------------------------- */
-#homepage .column--one-third {
-  padding-top: 30px; }
-
 /* Leaderboard ------------------------------ */
 .leaderboard-table {
   width: 100%;
