@@ -3339,7 +3339,8 @@ ul.bullet-list {
     position: relative;
     margin-bottom: 0;
     line-height: 1;
-    margin-left: 80px; }
+    margin-left: 80px;
+    max-width: 400px; }
     @media (max-width: 480px) {
       .logo-container .logo {
         margin-left: 66px; } }
