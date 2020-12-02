@@ -1233,7 +1233,7 @@ async function linkMetadata(url) {
       return reject(new Error('Please enter a valid url'));
     }
     try {
-      const queryUrl = 'https://api.microsponsors.io/v1/fetch-link-metadata?url=' + url;
+      const queryUrl = 'https://api.cryptofilter.xyz/v1/fetch-link-metadata?url=' + url;
       const response = await fetch(queryUrl, {
         method: 'GET',
         cache: 'no-cache',
@@ -1259,7 +1259,7 @@ async function addLinkFormPost(signedData, account, signature) {
 
   return new Promise(async (resolve, reject) => {
 
-    const queryUrl = 'https://api.microsponsors.io/v1/add-link';
+    const queryUrl = 'https://api.cryptofilter.xyz/v1/add-link';
     const postData = {
       linkUrl: signedData.linkUrl,
       title: signedData.title,
@@ -1298,7 +1298,7 @@ async function addLinkFormPost(signedData, account, signature) {
 async function tweetCuratedLink(signedData, account, signature) {
   console.log('--- fetch.tweetCuratedLink()');
 
-  const queryUrl = 'https://api.microsponsors.io/v1/tweet-curated-link';
+  const queryUrl = 'https://api.cryptofilter.xyz/v1/tweet-curated-link';
   const postData = {
     linkUrl: signedData.linkUrl,
     title: signedData.title,

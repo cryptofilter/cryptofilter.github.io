@@ -18372,7 +18372,7 @@ async function fetchLeaderboard(role) {
 
   return new Promise(async (resolve, reject) => {
 
-    const queryUrl = 'https://api.microsponsors.io/v1/cryptofilter-leaderboard?role=' + role;
+    const queryUrl = 'https://api.cryptofilter.xyz/v1/leaderboard?role=' + role;
     try {
       const response = await fetch(queryUrl, {
         method: 'GET',

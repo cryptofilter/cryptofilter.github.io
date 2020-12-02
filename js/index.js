@@ -1262,7 +1262,7 @@ async function fetchCuratedLinks(num) {
   return new Promise(async (resolve, reject) => {
     try {
       const limit = num || 6;
-      const url = `https://api.microsponsors.io/v1/fetch-curated-links?limit=${limit}`;
+      const url = `https://api.cryptofilter.xyz/v1/curated-links?limit=${limit}`;
       const response = await fetch(url, {
         method: 'GET',
         cache: 'no-cache',
@@ -18440,11 +18440,11 @@ module.exports = `<section class="section section--no-padding section--no-border
                 <%- domain %>
               </p>
 
-              <% if (item.twitterHandle && item.twitterHandle !== '@_eljee') { %>
+              <% if (item.curatorTwitterHandle && item.curatorTwitterHandle !== '@_eljee') { %>
                 <p class="link-postedby-twitter-handle no-horiz-padding">
                   Curated by:
-                  <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
-                    <%- item.twitterHandle %>
+                  <a href="https://twitter.com/<%- item.curatorTwitterHandle %>" class="no-state">
+                    <%- item.curatorTwitterHandle %>
                   </a>
                 </p>
               <% } %>

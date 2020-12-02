@@ -18346,7 +18346,7 @@ async function rssFeed(feedUrl) {
 
   return new Promise(async (resolve, reject) => {
     try {
-      const url = 'https://api.microsponsors.io/v1/fetch-rss-feed?url=' + feedUrl;
+      const url = 'https://api.cryptofilter.xyz/v1/fetch-rss-feed?url=' + feedUrl;
       const response = await fetch(url, {
         method: 'GET',
         cache: 'no-cache',
@@ -18434,7 +18434,7 @@ function start() {
 
 async function route (newState) {
   console.log('--- router.route()', newState);
-  console.trace();
+  // console.trace();
 
   _render(newState, { feed: 'loading' });
   _route(newState);
@@ -18589,7 +18589,7 @@ module.exports = `<div class="app-view column-container column-container--two-on
                         </p>
                       <% } %>
 
-                      <% if (item.ethAddress) { %>
+                      <% if (item.curatorEthAddress) { %>
                         <!-- only shows for curated links, not rss feeds -->
                         <p class="link-domain no-horiz-padding">
                           <% const domain = item.linkUrl.split('://')[1].split('/')[0]; %>
@@ -18605,12 +18605,12 @@ module.exports = `<div class="app-view column-container column-container--two-on
                         </p>
                       <% } %>
 
-                      <% if (item.twitterHandle) { %>
+                      <% if (item.curatorTwitterHandle) { %>
                         <!-- only displayed for curated links, not rss feeds -->
                         <p class="link-postedby-twitter-handle no-horiz-padding">
                           Curated by:
-                          <a href="https://twitter.com/<%- item.twitterHandle %>" class="no-state">
-                            <%- item.twitterHandle %>
+                          <a href="https://twitter.com/<%- item.curatorTwitterHandle %>" class="no-state">
+                            <%- item.curatorTwitterHandle %>
                           </a>
                           <%- curatedAtDateTime %>
                         </p>
