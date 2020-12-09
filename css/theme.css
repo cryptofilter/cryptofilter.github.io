@@ -148,6 +148,10 @@ textarea, input, fieldset {
     color: #FFF; }
     .overlay .link.no-state {
       color: #FFF; }
+    .overlay .link.border-top {
+      border-top: 1px solid #444; }
+    .overlay .link.border-bottom {
+      border-bottom: 1px solid #444; }
 
 .close-overlay::before, .close-overlay::after {
   background-color: #82c8f9; }

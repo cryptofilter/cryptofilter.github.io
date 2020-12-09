@@ -3433,11 +3433,17 @@ ul.bullet-list {
   .overlay .link {
     display: block;
     padding: 0 15px 0 30px;
-    font-size: 18px;
-    line-height: 40px;
+    font-size: 16px;
+    line-height: 36px;
     text-decoration: underline; }
     .overlay .link .fa {
       margin-top: 30px; }
+    .overlay .link.border-top {
+      padding-top: 15px;
+      margin-top: 15px; }
+    .overlay .link.border-bottom {
+      padding-bottom: 15px;
+      margin-bottom: 15px; }
 
 .close-overlay {
   display: block;
