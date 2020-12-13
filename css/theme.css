@@ -192,14 +192,14 @@ input.readonly {
 
 /* Sections ------------------------------------ */
 .section {
-  box-shadow: 1px 1px 3px #bbb;
+  box-shadow: 3px 3px 7px #d5d5d5;
   background: #FFF; }
   .section.section--no-border-box {
     box-shadow: none; }
   .section.section--contrast {
     background: #fbfbfb;
     border: none;
-    box-shadow: 5px 5px 7px #d5d5d5; }
+    box-shadow: 3px 3px 7px #d5d5d5; }
   .section.section--no-padding {
     box-shadow: none;
     border: none; }
@@ -315,7 +315,7 @@ input.readonly {
 .list-table.list-table--featured tr .link-column {
   border-bottom: none;
   background: #FFF;
-  box-shadow: 1px 1px 3px #bbb; }
+  box-shadow: 3px 3px 7px #d5d5d5; }
   @media (max-width: 1024px) {
     .list-table.list-table--featured tr .link-column {
       border-top: 1px solid #4e5c69;
