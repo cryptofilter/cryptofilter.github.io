@@ -3635,10 +3635,10 @@ ul.bullet-list {
       max-width: initial; }
     .section .messaging.margin-top-none {
       margin-top: 0; }
-    .section .messaging.min-height-130 {
-      min-height: 130px; }
+    .section .messaging.min-height-140 {
+      min-height: 140px; }
       @media (max-width: 1024px) {
-        .section .messaging.min-height-130 {
+        .section .messaging.min-height-140 {
           min-height: auto; } }
     .section .messaging .ital {
       font-style: italic; }
