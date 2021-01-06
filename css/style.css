@@ -3311,6 +3311,9 @@ ul.bullet-list {
     .show-mobile-only {
       display: block; } }
 
+.uppercase {
+  text-transform: uppercase; }
+
 /* Logo -------------------------------------- */
 .logo-container {
   z-index: 50;
