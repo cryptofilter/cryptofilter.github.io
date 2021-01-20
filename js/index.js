@@ -18420,7 +18420,7 @@ module.exports = `<section class="section section--no-padding section--no-border
 
               <% if (item.image) { %>
                 <a href="<%- item.linkUrl %>" onclick="_paq.push(['trackEvent', 'Curators Picks Section', 'Outbound Image Link Click', '<%- item.linkUrl %>']);">
-                  <img src="<%- item.image %>" />
+                  <img src="<%- item.image %>" loading="lazy" />
                 </a>
               <% } %>
 

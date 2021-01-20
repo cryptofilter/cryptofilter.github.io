@@ -18574,7 +18574,7 @@ module.exports = `<div class="app-view column-container column-container--two-on
 
                     <% if (item.image) { %>
                       <a href="<%- item.linkUrl %>">
-                        <img src="<%- item.image %>" />
+                        <img src="<%- item.image %>" loading="lazy" />
                       </a>
                     <% } %>
 
