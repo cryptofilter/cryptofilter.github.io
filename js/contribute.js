@@ -1583,7 +1583,9 @@ function getAuthorFromJsonLd(metadata) {
     // Coindesk format:
     if (metadata.jsonld.author) {
       if (metadata.jsonld.author && _.isArray(metadata.jsonld.author)) {
-        author = metadata.jsonld.author.join(' ');
+        let _author = [];
+        metadata.jsonld.author.forEach(a => author = _author.push(a.name));
+        author = _author.join(', ');
       }
     }
     // TheBlock.com, ModernConsensus.com format:
